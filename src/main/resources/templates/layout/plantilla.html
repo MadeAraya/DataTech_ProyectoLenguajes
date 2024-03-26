@@ -1,54 +1,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:fragment="head">
-        <title>Listado de Clientes</title>
-        <meta charset="UTF-8"/>
-        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<head th:fragment="head">
+    <title>Listado de Clientes</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+
+</head>
+
+<body>
+    <div th:fragment="aside">
         <style>
-            .container-table {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                height: auto;
-            }
-
-            .title-and-button {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-bottom: 20px;
-                width: 100%;
-            }
-
-            .title-and-button h1 {
-                margin-bottom: 10px;
-                text-align: center;
-            }
-
-            table {
-                border-collapse: collapse;
-                width: 100%;
-            }
-
-            th, td {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-
-            tr:hover {
-                background-color: #dddddd;
-            }
-
             .navbar-brand img {
                 max-height: 40px;
                 margin-right: 10px;
@@ -58,9 +28,7 @@
                 background-color: #343a40;
                 color: white;
                 padding: 20px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                height: calc(100vh - 56px);
             }
 
             .sidebar h2 {
@@ -71,119 +39,302 @@
             .nav-link {
                 color: white !important;
             }
-
-            .container-fluid {
-                padding-right: 0;
-                padding-left: 0;
-            }
-
-            footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                background-color: rgba(33, 37, 41);
-                height: 56px;
-            }
-
-            .button {
-                text-align: left;
-            }
         </style>
-    </head>
-    <body>
-        <header th:fragment="encabezado">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">
-                    <img src="https://cdn-icons-png.flaticon.com/128/10229/10229090.png" alt="Logo DataTech"/>
-                    DataTech
-                </a>
-            </nav>
-        </header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="https://cdn-icons-png.flaticon.com/128/10229/10229090.png" alt="Logo DataTech" />
+                DataTech
+            </a>
+        </nav>
 
-        <div class="container-fluid">
-            <div class="row">
-                <aside class="col-md-3 sidebar">
-                    <div class="sidebar">
-                        <h2>Menú</h2>
-                        <ul class="nav flex-column">
-                            <li class="nav-item active">
-                                <a class="nav-link" th:href="@{/}">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/productos}">Productos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/categorias}">Categorías</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/clientes/listar">Clientes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Empleados</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Ventas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/reportes}">Reportes</a>
-                            </li>
-                        </ul>
-                        <div style="margin-top: auto;"> <!-- Este div se estirará automáticamente -->
-                            <button class="btn btn-light">Actualizar Datos</button>
-                        </div>
-                    </div>
-                </aside>
+        <aside class="sidebar">
+            <h2>Menú</h2>
+            <ul class="nav flex-column">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/productos}">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/proveedores}">Proveedores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/categorias}">Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/clientes}">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ventas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/reportes}">Reportes</a>
+                </li>
+            </ul>
+        </aside>
+    </div>
 
-                <main class="col-md-9">
-                    <div class="container-table">
-                        <div class="title-and-button">
-                            <h1>Clientes registrados</h1>
-                            <div>
-                                <a href="/clientes/crear" class="btn btn-success">Crear Nuevo Cliente</a>
-                            </div>
-                        </div>
-                        <table>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellido1</th>
-                                <th>Apellido2</th>
-                                <th>Email</th>
-                                <th>Teléfono</th>
-                                <th>Fecha de Registro</th>
-                                <th>Acciones</th>
-                            </tr>
-                            <tr th:each="cliente : ${clientes}">
-                                <td th:text="${cliente.idCliente}"></td>
-                                <td th:text="${cliente.nombre}"></td>
-                                <td th:text="${cliente.apellido1}"></td>
-                                <td th:text="${cliente.apellido2}"></td>
-                                <td th:text="${cliente.email}"></td>
-                                <td th:text="${cliente.telefono}"></td>
-                                <td th:text="${#dates.format(cliente.fechaRegistro, 'dd/MM/yyyy HH:mm')}"></td>
-                                <td>
-                                    <a th:href="@{'/clientes/modificar/' + ${cliente.idCliente}}" class="btn btn-primary">Modificar</a>
 
-                                    <form th:action="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}" method="post" style="display: inline;">
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                        </table>
-
-                        <div class="button">
-                            <a href="/crear" class="btn btn-success">Crear Nuevo Cliente</a>
-                        </div>
-                    </div>
-                </main>
+    <div th:fragment="contenidoIndex">
+        <div class="container-table"
+            style="background-image: url('https://www.elcorteingles.es/recursos/informacioncorporativa/img/portal/2017/07/05/samsung-store-el-corte-ingles-de-callao-mini-1180x535.jpg'); background-size: cover; background-position: center;">
+            <div class="title-and-button">
+                <h1>Bienvenid@ a <span style="background-color: black;">DataTech</span></h1>
             </div>
         </div>
+    </div>
 
-        <footer th:fragment="footer">
-            <div class="container">
+    <div th:fragment="contenidoProductos" class="Productos">
+        <div class="container mt-4">
+            <h2>Gestión de Productos</h2>
 
+            <!-- Botón para abrir el formulario de agregar producto -->
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#agregarProductoModal">
+                Agregar Producto
+            </button>
+
+            <!-- Modal para agregar producto -->
+            <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
+                aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario para agregar producto -->
+                            <form th:action="@{/productos/agregar}" th:object="${inventario}" method="post">
+                                <div class="form-group">
+                                    <label for="nombreProducto">Nombre del producto</label>
+                                    <input type="text" class="form-control" th:field="*{producto.nombre}"
+                                        placeholder="Ingrese el nombre del producto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcionProducto">Descripción</label>
+                                    <textarea class="form-control" th:field="*{producto.descripcion}" rows="3"
+                                        placeholder="Ingrese la descripción del producto"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioProducto">Precio</label>
+                                    <input type="number" class="form-control" th:field="*{producto.precioUnitario}"
+                                        placeholder="Ingrese el precio del producto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stockProducto">Stock</label>
+                                    <input type="number" class="form-control" th:field="*{cantDisponible}"
+                                        placeholder="Ingrese el stock del producto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoriaProducto">Categoría</label>
+                                    <select class="form-control" th:field="*{producto.categoria.idCategoria}">
+                                        <option value="" selected>Seleccione una categoría</option>
+                                        <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
+                                            th:text="${categoria.nombre}"></option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </footer>
-    </body>
+
+            <!-- Modal para editar producto -->
+            <div class="modal fade" id="editarProductoModal" tabindex="-1" role="dialog"
+                aria-labelledby="editarProductoModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editarProductoModalLabel">Editar Producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario para editar producto -->
+                            <form th:action="@{/productos/editar}" th:object="${inventario}" method="post">
+                                <input type="hidden" th:field="*{idInventario}">
+                                <div class="form-group">
+                                    <label for="nombreProducto">Nombre del producto</label>
+                                    <input type="text" class="form-control" th:field="*{producto.nombre}"
+                                        placeholder="Ingrese el nombre del producto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcionProducto">Descripción</label>
+                                    <textarea class="form-control" th:field="*{producto.descripcion}" rows="3"
+                                        placeholder="Ingrese la descripción del producto"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioProducto">Precio</label>
+                                    <input type="number" class="form-control" th:field="*{producto.precioUnitario}"
+                                        placeholder="Ingrese el precio del producto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stockProducto">Stock</label>
+                                    <input type="number" class="form-control" th:field="*{cantDisponible}"
+                                        placeholder="Ingrese el stock del producto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoriaProducto">Categoría</label>
+                                    <select class="form-control" th:field="*{producto.categoria.idCategoria}">
+                                        <option value="" selected>Seleccione una categoría</option>
+                                        <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
+                                            th:text="${categoria.nombre}"></option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de listado de productos -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="inventario : ${inventarios}">
+                        <td th:text="${inventario.producto.idProducto}">1</td>
+                        <td th:text="${inventario.producto.nombre}">Nombre del Producto</td>
+                        <td th:text="${inventario.producto.descripcion}">Descripción del Producto</td>
+                        <td
+                            th:text="${#numbers.formatDecimal(inventario.producto.precioUnitario, 0, 'COMMA', 2, 'POINT')}">
+                            ₡105620.00</td>
+                        <td th:text="${inventario.cantDisponible}">10</td>
+                        <td th:text="${inventario.producto.categoria.nombre}">Categoría del Producto</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                th:attr="data-target='#editarProductoModal', data-id=${inventario.idInventario}">Editar</button>
+                            <button class="btn btn-sm btn-danger"
+                                th:href="@{/productos/eliminar/{id}(id=${inventario.producto.idProducto})}">Eliminar</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <div th:fragment="contenidoClientes" class="clientes">
+        <div class="container mt-4">
+            <h2>Gestión de Clientes</h2>
+
+            <!-- Botón para abrir el formulario de agregar cliente -->
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#clienteModal">
+                Agregar Cliente
+            </button>
+
+            <!-- Modal para agregar cliente -->
+            <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="clienteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="clienteModalLabel">Agregar Cliente</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario para agregar cliente -->
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombreCliente">Nombre</label>
+                                    <input type="text" class="form-control" id="nombreCliente"
+                                        placeholder="Ingrese el nombre del cliente">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellido1Cliente">Primer Apellido</label>
+                                    <input type="text" class="form-control" id="apellido1Cliente"
+                                        placeholder="Ingrese el primer apellido del cliente">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellido2Cliente">Segundo Apellido</label>
+                                    <input type="text" class="form-control" id="apellido2Cliente"
+                                        placeholder="Ingrese el segundo apellido del cliente">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailCliente">Email</label>
+                                    <input type="email" class="form-control" id="emailCliente"
+                                        placeholder="Ingrese el email del cliente">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefonoCliente">Teléfono</label>
+                                    <input type="text" class="form-control" id="telefonoCliente"
+                                        placeholder="Ingrese el teléfono del cliente">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Guardar Cliente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de listado de clientes -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Primer Apellido</th>
+                        <th scope="col">Segundo Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.idCliente}">1</td>
+                        <td th:text="${cliente.nombre}">Nombre del Cliente</td>
+                        <td th:text="${cliente.apellido1}">Primer Apellido</td>
+                        <td th:text="${cliente.apellido2}">Segundo Apellido</td>
+                        <td th:text="${cliente.email}">Email del Cliente</td>
+                        <td th:text="${cliente.telefono}">Teléfono del Cliente</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                data-target="#clienteModal">Editar</button>
+                            <button class="btn btn-sm btn-danger"
+                                th:attr="data-id=${cliente.idCliente}">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+
 </html>
