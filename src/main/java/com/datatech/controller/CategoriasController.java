@@ -46,6 +46,24 @@ public class CategoriasController {
         return "redirect:/categorias";
     }
 
+    @GetMapping("/editar/{id}")
+    public String editarCategoria(@PathVariable("id") Long idCategoria, Model model) {
+        Categoria categoria = categoriaService.getCategoriaPorId(idCategoria);
+        model.addAttribute("categoria", categoria);
+        return "categorias/editar";
+    }
+
+
+    /*
+     * 
+     * @GetMapping("/editar/{id}")
+    public String editarProveedor(@PathVariable("id") Long idProveedor, Model model) {
+        Proveedor proveedor = proveedorService.getProveedorPorId(idProveedor);
+        model.addAttribute("proveedor", proveedor);
+        return "/proveedores/editar"; 
+    }
+     */
+
     // Controlador para eliminar una categoría
     @GetMapping("/eliminar/{id}")
     public String eliminarCategoria(@PathVariable("id") Long idCategoria) {

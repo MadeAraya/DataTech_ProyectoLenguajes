@@ -26,6 +26,13 @@ public class CategoriaServiceImpl implements CategoriaService {
         var lista = categoriaDao.findAll();
         return lista;
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Categoria getCategoriaPorId(Long idCategoria) {
+        return categoriaDao.findById(idCategoria).orElse(null);
+    }
+
 
     @Override
     @Transactional

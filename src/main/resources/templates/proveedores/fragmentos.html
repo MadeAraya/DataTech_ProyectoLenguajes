@@ -11,9 +11,6 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-
-
 </head>
 
 <body>
@@ -73,51 +70,7 @@
                 </div>
             </div>
 
-            <!-- Modal para editar proveedor -->
-            <div class="modal fade" id="editarProveedorModal" tabindex="-1" role="dialog"
-                aria-labelledby="editarProveedorModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editarProveedorModalLabel">Editar Proveedor</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Formulario para editar proveedor -->
-                            <form th:action="@{/proveedores/editar}" th:object="${proveedor}" method="post">
-                                <input type="hidden" th:field="*{idProveedor}">
-                                <div class="form-group">
-                                    <label for="nombreProveedor">Nombre</label>
-                                    <input type="text" class="form-control" th:field="*{nombre}"
-                                        placeholder="Ingrese el nombre del proveedor">
-                                </div>
-                                <div class="form-group">
-                                    <label for="apellidoProveedor">Apellido</label>
-                                    <input type="text" class="form-control" th:field="*{apellido}"
-                                        placeholder="Ingrese el apellido del proveedor">
-                                </div>
-                                <div class="form-group">
-                                    <label for="telefonoProveedor">Teléfono</label>
-                                    <input type="text" class="form-control" th:field="*{telefono}"
-                                        placeholder="Ingrese el teléfono del proveedor">
-                                </div>
-                                <div class="form-group">
-                                    <label for="emailProveedor">Email</label>
-                                    <input type="email" class="form-control" th:field="*{email}"
-                                        placeholder="Ingrese el email del proveedor">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <!-- Tabla de listado de proveedores -->
             <table class="table">
                 <thead>
@@ -138,17 +91,46 @@
                         <td th:text="${proveedor.telefono}">Teléfono del Proveedor</td>
                         <td th:text="${proveedor.email}">Email del Proveedor</td>
                         <td>
-                            <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                data-target="#editarProveedorModal">Editar</button>
+                            <a class="btn btn-sm btn-primary"
+                                th:href="@{/proveedores/editar/{id}(id=${proveedor.idProveedor})}"><i class="fas fa-edit"></i>Editar</a>
 
-                            <button class="btn btn-sm btn-danger"
-                                th:href="@{/proveedores/eliminar/{id}(id=${proveedor.idProveedor})}">Eliminar</button>
+                            <a class="btn btn-sm btn-danger"
+                                th:href="@{/proveedores/eliminar/{id}(id=${proveedor.idProveedor})}">Eliminar</a>
 
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        
+    </div>
+
+
+    <div th:fragment="contenidoEditarProveedor">
+        <form th:action="@{/proveedores/editar}" th:object="${proveedor}" method="post">
+            <input type="hidden" th:field="*{idProveedor}" />
+            <div class="form-group">
+                <label for="nombreProveedor">Nombre</label>
+                <input type="text" class="form-control" th:field="*{nombre}"
+                    placeholder="Ingrese el nombre del proveedor">
+            </div>
+            <div class="form-group">
+                <label for="apellidoProveedor">Apellido</label>
+                <input type="text" class="form-control" th:field="*{apellido}"
+                    placeholder="Ingrese el apellido del proveedor">
+            </div>
+            <div class="form-group">
+                <label for="telefonoProveedor">Teléfono</label>
+                <input type="text" class="form-control" th:field="*{telefono}"
+                    placeholder="Ingrese el teléfono del proveedor">
+            </div>
+            <div class="form-group">
+                <label for="emailProveedor">Email</label>
+                <input type="email" class="form-control" th:field="*{email}"
+                    placeholder="Ingrese el email del proveedor">
+            </div>
+            <button type="submit" class="btn btn-primary" >Guardar Cambios</button>
+        </form>
     </div>
 
 </body>
