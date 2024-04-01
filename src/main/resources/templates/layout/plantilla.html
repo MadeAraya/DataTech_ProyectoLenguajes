@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head">
-    <title>Listado de Clientes</title>
+    <title>DataTech</title>
     <meta charset="UTF-8" />
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
@@ -16,9 +16,9 @@
 
 </head>
 
-<body>
-    <div th:fragment="aside">
-        <style>
+    <body>
+        <div th:fragment="aside">
+            <style>
             .navbar-brand img {
                 max-height: 40px;
                 margin-right: 10px;
@@ -39,44 +39,44 @@
             .nav-link {
                 color: white !important;
             }
-        </style>
+            </style>
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" th:href="@{/}">
                 <img src="https://cdn-icons-png.flaticon.com/128/10229/10229090.png" alt="Logo DataTech" />
-                DataTech
-            </a>
-        </nav>
+                            DataTech
+                        </a>
+                    </nav>
 
         <aside class="sidebar">
-            <h2>Menú</h2>
-            <ul class="nav flex-column">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/productos}">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/proveedores}">Proveedores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/categorias}">Categorías</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/clientes}">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Empleados</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Ventas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/reportes}">Reportes</a>
-                </li>
-            </ul>
-        </aside>
-    </div>
+                                <h2>Menú</h2>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" th:href="@{/}">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/productos}">Productos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/proveedores}">Proveedores</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/categorias}">Categorías</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/clientes}">Clientes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Empleados</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/ventas}">Ventas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/reportes}">Reportes</a>
+                                    </li>
+                                </ul>
+                        </aside>
+                    </div>
 
 
     <div th:fragment="contenidoIndex">

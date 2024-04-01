@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div th:fragment="listaVentas" class="ventas">
+        <div class="container mt-4">
+            <h2>Ventas</h2>
+            <div class="col-md-3">   
+                <button 
+                    type="button" 
+                    class="btn btn-success btn-block" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#agregarVenta">
+                    <i class="fas fa-plus"></i>Agregar Venta
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Total Pagado</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr th:each="venta, iterStat : ${ventas}">
+                        <th scope="row" th:text="${iterStat.count}">1</th>
+                        <td th:text="${venta.idCliente}">Cliente</td>
+                        <td th:text="${venta.totalPagado}">Total Pagado</td>
+                        <td th:text="${venta.fecha}">Fecha</td>
+                        <td><a class="btn btn-success" th:href="@{'/detalleVenta?id=' + ${venta.idVenta}}">Ver detalles</a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    </body>
+</html>
