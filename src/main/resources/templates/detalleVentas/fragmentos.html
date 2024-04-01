@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .hola {
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div th:fragment="venta" class="detalleVentas">
+            <h2></h2>
+            <h2>Detalle de Venta</h2>
+            
+            <div th:each="venta : ${ventas}" class="border border-secondary p-3 rounded w-75">
+                <div class="d-flex flex-row mb-3 gap-3 w-100"> 
+                <div class="p-1 border border-success-subtle rounded"><p>ID Venta: <span th:text="${venta.idVenta}"></span></p></div>
+                <div class="p-1 border border-success-subtle rounded"><p>Cliente: <span th:text="${venta.idCliente}"></span></p></div>
+                <div class="p-1 border border-success-subtle rounded"><p>Total Pagado: <span th:text="${venta.totalPagado}"></span></p></div>
+                <div class="p-1 border border-success-subtle rounded"><p>Fecha: <span th:text="${venta.fecha}"></span></p></div>
+                <div class="p-1 btn btn-success" style="margin-left: 350px;"><p>Editar</p></div>
+                <div class="p-1 btn btn-danger"><p>Eliminar</p></div>
+                </div>
+                <div class="col-md-3 w-100">   
+                
+            <table class="table border rounded">
+                <h4>Detalle Productos</h4>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr th:each="detalleVenta, iterStat : ${detalleVentas}" th:if="${detalleVenta.idVenta} == ${venta.idVenta}">
+                        <th scope="row" th:text="${iterStat.count}">1</th>
+                        <td th:text="${detalleVenta.idProducto}">ID Producto</td>
+                        <td th:text="${detalleVenta.cantidad}">Cantidad</td>
+                        <td th:text="${detalleVenta.precioUnitario}">Precio Unitario</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </body>
+</html>
