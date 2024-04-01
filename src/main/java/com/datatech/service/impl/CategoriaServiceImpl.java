@@ -10,7 +10,6 @@ import com.datatech.domain.Categoria;
 
 import javax.persistence.*;
 
-
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
@@ -21,18 +20,30 @@ public class CategoriaServiceImpl implements CategoriaService {
     private EntityManager entityManager;
 
     @Override
-    @Transactional(readOnly = true) // Para abrir la tabla en modo de solo lectura
+    @Transactional(readOnly = true)
     public List<Categoria> getCategorias() {
-        var lista = categoriaDao.findAll();
-        return lista;
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos", Categoria.class);
+        query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
+        query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+        query.setParameter(2, "tab_categoria");
+        query.execute();
+        return query.getResultList();
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Categoria getCategoriaPorId(Long idCategoria) {
-        return categoriaDao.findById(idCategoria).orElse(null);
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos_porID",
+                Categoria.class);
+        query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
+        query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);
+        query.setParameter(2, "tab_categoria");
+        query.setParameter(3, idCategoria);
+        query.execute();
+        List<Categoria> result = query.getResultList();
+        return result.isEmpty() ? null : result.get(0);
     }
-
 
     @Override
     @Transactional
@@ -51,7 +62,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         entityManager.createNativeQuery("CALL sp_actualizar_categoria(:idCategoria, :nombre)")
                 .setParameter("idCategoria", idCategoria)
                 .setParameter("nombre", nombre)
-                .executeUpdate();   
+                .executeUpdate();
     }
 
     @Override

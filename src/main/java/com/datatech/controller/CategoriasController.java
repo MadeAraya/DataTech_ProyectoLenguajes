@@ -54,16 +54,6 @@ public class CategoriasController {
     }
 
 
-    /*
-     * 
-     * @GetMapping("/editar/{id}")
-    public String editarProveedor(@PathVariable("id") Long idProveedor, Model model) {
-        Proveedor proveedor = proveedorService.getProveedorPorId(idProveedor);
-        model.addAttribute("proveedor", proveedor);
-        return "/proveedores/editar"; 
-    }
-     */
-
     // Controlador para eliminar una categoría
     @GetMapping("/eliminar/{id}")
     public String eliminarCategoria(@PathVariable("id") Long idCategoria) {

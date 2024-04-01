@@ -22,12 +22,12 @@ public class Empleado implements Serializable{
     @Column(name = "id_empleado")
     private Long idEmpleado;
     
-    @ManyToOne
-    @JoinColumn(name = "id_sucursal")
+    // @ManyToOne
+    // @JoinColumn(name = "id_sucursal")
     private Long idSucursal;
     
-    @ManyToOne
-    @JoinColumn(name = "id_cargo")
+    // @ManyToOne
+    // @JoinColumn(name = "id_cargo")
     private Long idCargo;
     
     private Date fechaContratacion;
@@ -37,71 +37,6 @@ public class Empleado implements Serializable{
     private String telefono;
     private String email;
 
-    public Long getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    public void setIdEmpleado(Long idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-
-    public Long getIdSucursal() {
-        return idSucursal;
-    }
-
-    public void setIdSucursal(Long idSucursal) {
-        this.idSucursal = idSucursal;
-    }
-
-    public Long getIdCargo() {
-        return idCargo;
-    }
-
-    public void setIdCargo(Long idCargo) {
-        this.idCargo = idCargo;
-    }
-
-    public Date getFechaContratacion() {
-        return fechaContratacion;
-    }
-
-    public void setFechaContratacion(Date fechaContratacion) {
-        this.fechaContratacion = fechaContratacion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    
 }
 
 /*
