@@ -7,10 +7,9 @@ package com.datatech.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-import com.datatech.domain.Categoria;
+import com.datatech.domain.Sucursal;
 
-
-public interface CategoriaDao extends JpaRepository<Categoria,Long> {
+public interface SucursalDao extends JpaRepository<Sucursal,Long> {
     
 }
 
