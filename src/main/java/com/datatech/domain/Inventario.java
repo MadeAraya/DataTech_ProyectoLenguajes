@@ -30,7 +30,8 @@ public class Inventario implements Serializable {
     @JoinColumn(name = "id_proveedor")
     private Proveedor proveedor;
 
-    private int cantDisponible;
+    private Long cantDisponible;
+
 }
 
 /*

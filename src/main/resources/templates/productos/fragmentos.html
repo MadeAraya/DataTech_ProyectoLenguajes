@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Listado de Clientes</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+    <div th:fragment="contenidoProductos" class="Productos">
+        <div class="container mt-4">
+            <h2>Gestión de Productos</h2>
+
+            <!-- Botón para abrir el formulario de agregar producto -->
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#agregarProductoModal">
+                Agregar Producto
+            </button>
+
+            <!-- Modal para agregar producto -->
+            <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
+                aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario para agregar producto -->
+                            <form th:action="@{/productos/agregar}" th:object="${producto}" method="post">
+                                <div class="form-group">
+                                    <label for="nombreProducto">Nombre del producto</label>
+                                    <input type="text" class="form-control" th:field="*{nombre}"
+                                        placeholder="Ingrese el nombre del producto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcionProducto">Descripción</label>
+                                    <textarea class="form-control" th:field="*{descripcion}" rows="3"
+                                        placeholder="Ingrese la descripción del producto"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioProducto">Precio</label>
+                                    <input type="number" class="form-control" th:field="*{precioUnitario}"
+                                        placeholder="Ingrese el precio del producto">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="categoriaProducto">Categoría</label>
+                                    <select class="form-control" th:field="*{categoria.idCategoria}">
+                                        <option value="" selected>Seleccione una categoría</option>
+                                        <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
+                                            th:text="${categoria.nombre}"></option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Tabla de listado de productos -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto : ${productos}">
+                        <td th:text="${producto.idProducto}">1</td>
+                        <td th:text="${producto.nombre}">Nombre del Producto</td>
+                        <td th:text="${producto.descripcion}">Descripción del Producto</td>
+                        <td th:text="${#numbers.formatDecimal(producto.precioUnitario, 0, 'COMMA', 2, 'POINT')}">
+                            ₡105620.00</td>
+                        <td th:text="${producto.getCantidadTotalStock()}">10</td>
+                        <td th:text="${producto.categoria.nombre}">Categoría del Producto</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary"
+                                th:href="@{/productos/editar/{id}(id=${producto.idProducto})}">Editar</a>
+                            <a class="btn btn-sm btn-danger"
+                                th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}">Eliminar</a>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div th:fragment="contenidoEditarProducto">
+        <form th:action="@{/productos/editar}" th:object="${producto}" method="post">
+            <input type="hidden" th:field="*{idProducto}" />
+            <div class="form-group">
+                <label for="nombreProducto">Nombre</label>
+                <input type="text" class="form-control" th:field="*{nombre}"
+                    placeholder="Ingrese el nombre del producto">
+            </div>
+            <div class="form-group">
+                <label for="descripcionProducto">Descripción</label>
+                <input type="text" class="form-control" th:field="*{descripcion}"
+                    placeholder="Ingrese la descripción del producto">
+            </div>
+            <div class="form-group">
+                <label for="precioUnitarioProducto">Precio Unitario</label>
+                <input type="number" class="form-control" th:field="*{precioUnitario}"
+                    placeholder="Ingrese el precio unitario del producto">
+            </div>
+            <div class="form-group">
+                <label for="categoriaProducto">Categoría</label>
+                <select class="form-control" th:field="*{categoria.idCategoria}">
+                    <option value="" th:unless="${categorias}" th:text="Seleccione una categoría"></option>
+                    <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
+                        th:text="${categoria.nombre}"
+                        th:selected="${categoria.idCategoria == producto.categoria.idCategoria}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+    </div>
+
+
+
+
+</body>
+
+
+</html>
