@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>DateTech</title>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            form {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+            label {
+                display: block;
+                margin-bottom: 5px;
+                color: #555;
+            }
+            input {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    </head>
+
+    <body>
+
+        <!-- Listado de clientes -->
+
+        <div th:fragment="listadoClientes" class="clientes">
+            <div class="container">
+                <h2>Gestión de Clientes</h2>
+                <a href="/clientes/crear" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Agregar Cliente
+                </a>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido1</th>
+                            <th>Apellido2</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Fecha de Registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cliente : ${clientes}">
+                            <td th:text="${cliente.idCliente}"></td>
+                            <td th:text="${cliente.nombre}"></td>
+                            <td th:text="${cliente.apellido1}"></td>
+                            <td th:text="${cliente.apellido2}"></td>
+                            <td th:text="${cliente.email}"></td>
+                            <td th:text="${cliente.telefono}"></td>
+                            <td th:text="${#dates.format(cliente.fechaRegistro, 'dd/MM/yyyy')}"></td>
+                            <td>
+                                <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <form th:action="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}" method="post" style="display: inline;">
+                                    <input type="hidden" name="tabla" value="tab_cliente" />
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Formulario de creación de clientes -->
+
+        <div th:fragment="FormCrearClientes" class="clientes">
+            <form th:action="@{/clientes/crear}" method="post">
+                <h1>Crear Cliente</h1>
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" class="form-control" name="nombre" th:value="${cliente.nombre}" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellido 1:</label>
+                    <input type="text" class="form-control" name="apellido1" th:value="${cliente.apellido1}" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellido 2:</label>
+                    <input type="text" class="form-control" name="apellido2" th:value="${cliente.apellido2}" required>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico:</label>
+                    <input type="email" class="form-control" name="email" th:value="${cliente.email}" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono:</label>
+                    <input type="text" class="form-control" name="telefono" th:value="${cliente.telefono}" required>
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Registro:</label>
+                    <input type="text" class="form-control" name="fechaRegistro" th:value="${#dates.format(cliente.fechaRegistro, 'yyyy-MM-dd')}" required>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-success mr-2">
+                        <i class="fas fa-plus"></i> Crear Cliente
+                    </button>
+                    <a href="/clientes/listado" class="btn btn-danger">
+                        <i class="fas fa-times"></i> Cancelar
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+
+        <!-- Formulario de modificacion de clientes -->
+
+        <div th:fragment="FormEditarClientes" class="clientes">
+            <form th:action="@{/clientes/guardar}" method="post">
+                <h1>Editar Cliente</h1>
+                <input type="hidden" name="idCliente" th:value="${cliente.idCliente}" />
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" class="form-control" name="nombre" th:value="${cliente.nombre}" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellido 1:</label>
+                    <input type="text" class="form-control" name="apellido1" th:value="${cliente.apellido1}" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellido 2:</label>
+                    <input type="text" class="form-control" name="apellido2" th:value="${cliente.apellido2}" required>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico:</label>
+                    <input type="email" class="form-control" name="email" th:value="${cliente.email}" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono:</label>
+                    <input type="text" class="form-control" name="telefono" th:value="${cliente.telefono}" required>
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Registro:</label>
+                    <input type="date" class="form-control" name="fechaRegistro" th:value="${#dates.format(cliente.fechaRegistro, 'yyyy-MM-dd')}" required>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-success mr-2">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+                    <a href="/clientes/listado" class="btn btn-danger">
+                        <i class="fas fa-times"></i> Cancelar
+                    </a>
+                </div>
+
+            </form>
+
+
+    </body>
+</html>
