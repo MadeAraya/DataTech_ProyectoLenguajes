@@ -27,6 +27,9 @@ public class Sucursal implements Serializable {
     @OneToMany(mappedBy = "sucursal")
     private List<Inventario> inventarios;
     
+    @OneToMany(mappedBy = "sucursal")
+    private List<Empleado> empleados;
+    
     
 }
 

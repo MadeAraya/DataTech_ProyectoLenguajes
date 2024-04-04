@@ -40,9 +40,7 @@ public class SucursalController {
     
     @PostMapping("/editar")
     public String actualizarSucursal(@ModelAttribute Sucursal sucursal) {
-        sucursalService.actualizarSucursal(sucursal.getIdSucursal(), sucursal.getNombre(),
-                sucursal.getProvincia(), sucursal.getCanton(), sucursal.getDireccion(), 
-                sucursal.getTelefono(), sucursal.getSitioWeb());
+        sucursalService.actualizarSucursal(sucursal);
         return "redirect:/sucursal";
     }
     

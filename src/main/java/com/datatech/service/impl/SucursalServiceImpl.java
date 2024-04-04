@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.datatech.service.SucursalService;
 import com.datatech.dao.SucursalDao;
 import com.datatech.domain.Sucursal;
-import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -55,18 +54,17 @@ public class SucursalServiceImpl implements SucursalService {
     }
 
     @Override
-    public void actualizarSucursal(Long idSucursal, String nombre, String provincia, String canton, 
-                                                String direccion, String telefono, String sitioWeb){
-        System.out.println("v_id_sucursal: " + idSucursal);
+    public void actualizarSucursal(Sucursal sucursal){
+        System.out.println("v_id_sucursal: " + sucursal.getIdSucursal());
         entityManager.createNativeQuery("CALL sp_actualizar_sucursal(:v_id_sucursal, :v_nombre, :v_provincia,"
                 + ":v_canton, :v_direccion, :v_telefono, :v_sitio_web)")
-                .setParameter("v_id_sucursal", idSucursal)
-                .setParameter("v_nombre", nombre)
-                .setParameter("v_provincia", provincia)
-                .setParameter("v_canton", canton)
-                .setParameter("v_direccion", direccion)
-                .setParameter("v_telefono", telefono)
-                .setParameter("v_sitio_web", sitioWeb)
+                .setParameter("v_id_sucursal", sucursal.getIdSucursal())
+                .setParameter("v_nombre", sucursal.getNombre())
+                .setParameter("v_provincia", sucursal.getProvincia())
+                .setParameter("v_canton", sucursal.getCanton())
+                .setParameter("v_direccion", sucursal.getDireccion())
+                .setParameter("v_telefono", sucursal.getTelefono())
+                .setParameter("v_sitio_web", sucursal.getSitioWeb())
                 .executeUpdate();
         
     }

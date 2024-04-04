@@ -6,7 +6,6 @@ package com.datatech.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -22,13 +21,14 @@ public class Empleado implements Serializable{
     @Column(name = "id_empleado")
     private Long idEmpleado;
     
-    // @ManyToOne
-    // @JoinColumn(name = "id_sucursal")
-    private Long idSucursal;
+    @ManyToOne
+    @JoinColumn(name = "id_sucursal")
+    private Sucursal sucursal;
     
-    // @ManyToOne
-    // @JoinColumn(name = "id_cargo")
-    private Long idCargo;
+    @ManyToOne
+    @JoinColumn(name = "id_cargo")
+    private Cargo cargo;
+    
     
     private Date fechaContratacion;
     

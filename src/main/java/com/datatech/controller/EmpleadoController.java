@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.datatech.domain.Empleado;
 import com.datatech.service.EmpleadoService;
+import com.datatech.service.SucursalService;
+import com.datatech.service.CargoService;
 
 @Controller
 @RequestMapping("/empleados")
@@ -22,17 +24,27 @@ public class EmpleadoController {
     @Autowired
     private EmpleadoService empleadoService;
     
+    @Autowired
+    private SucursalService sucursalService;
+    
+    @Autowired
+    private CargoService cargoService;
+    
     @GetMapping
     public String empleados(Model model){
         var lista = empleadoService.getEmpleados();
+        var listaSucursales = sucursalService.getSucursal();
+        var listaCargos = cargoService.getCargos();
         model.addAttribute("empleados",lista);
+        model.addAttribute("sucursales", listaSucursales);
+        model.addAttribute("cargos", listaCargos);
         model.addAttribute("empleado",new Empleado());
         return "empleados/listado";
     }
     
     @PostMapping("/agregar")
     public String agregarEmpleado(@ModelAttribute Empleado empleado) {
-        empleadoService.crearEmpleado(empleado.getIdSucursal(), empleado.getIdCargo(),
+        empleadoService.crearEmpleado(empleado.getSucursal().getIdSucursal(), empleado.getCargo().getIdCargo(),
                 empleado.getFechaContratacion(), empleado.getNombre(), empleado.getApellido(),
                 empleado.getTelefono(), empleado.getEmail());
         return "redirect:/categorias";
@@ -40,7 +52,7 @@ public class EmpleadoController {
     
     @PostMapping("/editar")
     public String actualizarEmpleado(@ModelAttribute Empleado empleado) {
-        empleadoService.actualizarEmpleado(empleado.getIdEmpleado(), empleado.getIdSucursal(), empleado.getIdCargo(),
+        empleadoService.actualizarEmpleado(empleado.getIdEmpleado(), empleado.getSucursal().getIdSucursal(),empleado.getCargo().getIdCargo(),
                 empleado.getFechaContratacion(), empleado.getNombre(), empleado.getApellido(),
                 empleado.getTelefono(), empleado.getEmail());
         return "redirect:/empleados";
