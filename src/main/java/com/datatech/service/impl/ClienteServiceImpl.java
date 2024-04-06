@@ -3,12 +3,16 @@ package com.datatech.service.impl;
 import com.datatech.dao.ClienteDao;
 import com.datatech.domain.Cliente;
 import com.datatech.service.ClienteService;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -29,8 +33,26 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<Cliente> obtenerClientes() { //Me falta obtener los datos por medio de un sp
-        return clienteRepository.findAll();
+    public List<Cliente> obtenerClientes() {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos");
+        query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
+        query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+        query.setParameter(2, "tab_cliente");
+        query.execute();
+        List<Object[]> results = query.getResultList();
+        List<Cliente> clientes = new ArrayList<>();
+        for (Object[] result : results) {
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(((BigDecimal) result[0]).longValue());
+            cliente.setNombre((String) result[1]);
+            cliente.setApellido1((String) result[2]);
+            cliente.setApellido2((String) result[3]);
+            cliente.setEmail((String) result[4]);
+            cliente.setTelefono((String) result[5]);
+            cliente.setFechaRegistro(new Date(((Timestamp) result[6]).getTime()));
+            clientes.add(cliente);
+        }
+        return clientes;
     }
 
     @Override
