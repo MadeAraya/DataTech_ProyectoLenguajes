@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface DetalleVentaService {
     List<DetalleVenta> obtenerDetalleVentas();
-    void crearDetalleVenta(DetalleVenta detalleVenta);
-    void eliminarDetalleVenta(int idDetalle);
+    void eliminarDetalleVenta(long idDetalle);
+    void insertarDetalleVenta(long idVenta, long idProducto, long cantidad, double precioUnitario);
+    void actualizarDetalleVenta(long idDetalle, long idVenta, long idProducto, long cantidad, double precioUnitario);
 }
