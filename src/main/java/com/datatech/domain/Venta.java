@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,37 +17,41 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tab_venta")
 public class Venta {
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_venta")
-    private BigDecimal  idVenta;
-    private BigDecimal  idCliente;
-    private BigDecimal  totalPagado;
+    private long  idVenta;
+    //private BigDecimal  idCliente;
+    private double  totalPagado;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
 
-    public BigDecimal getIdVenta() {
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+    
+    public long getIdVenta() {
         return idVenta;
     }
 
-    public void setIdVenta(BigDecimal idVenta) {
+    public void setIdVenta(long idVenta) {
         this.idVenta = idVenta;
     }
 
-    public BigDecimal getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(BigDecimal idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public BigDecimal getTotalPagado() {
+    public double getTotalPagado() {
         return totalPagado;
     }
 
-    public void setTotalPagado(BigDecimal totalPagado) {
+    public void setTotalPagado(double totalPagado) {
         this.totalPagado = totalPagado;
     }
 

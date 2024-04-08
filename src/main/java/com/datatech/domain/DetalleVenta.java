@@ -19,61 +19,65 @@ public class DetalleVenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_detalle")
-    private BigDecimal idDetalle;
-    private BigDecimal idVenta;
-    private BigDecimal idProducto;
-    private BigDecimal cantidad;
-    private BigDecimal precioUnitario;
+    private long idDetalle;
+    private long idVenta;
+    //private BigDecimal idProducto;
+    private long cantidad;
+    private long precioUnitario;
 
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
+    
     public DetalleVenta() {
     }
 
-    public DetalleVenta(BigDecimal idDetalle, BigDecimal idVenta, BigDecimal idProducto, BigDecimal cantidad, BigDecimal precioUnitario) {
+    public DetalleVenta(long idDetalle, long idVenta, Producto producto, long cantidad, long precioUnitario) {
         this.idDetalle = idDetalle;
         this.idVenta = idVenta;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
-        this.idProducto = idProducto;
+        this.producto = producto;
     }
     
-    public BigDecimal getIdDetalle() {
+    public long getIdDetalle() {
         return idDetalle;
     }
 
-    public void setIdDetalle(BigDecimal idDetalle) {
+    public void setIdDetalle(long idDetalle) {
         this.idDetalle = idDetalle;
     }
 
-    public BigDecimal getIdVenta() {
+    public long getIdVenta() {
         return idVenta;
     }
 
-    public void setIdVenta(BigDecimal idVenta) {
+    public void setIdVenta(long idVenta) {
         this.idVenta = idVenta;
     }
 
-    public BigDecimal getCantidad() {
+    public long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(BigDecimal cantidad) {
+    public void setCantidad(long cantidad) {
         this.cantidad = cantidad;
     }
 
-    public BigDecimal getPrecioUnitario() {
+    public long getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(BigDecimal precioUnitario) {
+    public void setPrecioUnitario(long precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 
-    public BigDecimal getIdProducto() {
-        return idProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(BigDecimal idProducto) {
-        this.idProducto = idProducto;
-    }    
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
     
 }

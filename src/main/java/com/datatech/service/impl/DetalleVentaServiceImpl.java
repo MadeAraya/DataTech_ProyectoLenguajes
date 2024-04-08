@@ -3,6 +3,7 @@ package com.datatech.service.impl;
 
 import com.datatech.dao.DetalleVentaDao;
 import com.datatech.domain.DetalleVenta;
+import com.datatech.domain.Producto;
 import com.datatech.service.DetalleVentaService;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -43,11 +44,13 @@ public class DetalleVentaServiceImpl implements DetalleVentaService {
         List<DetalleVenta> detalleventas = new ArrayList<>();
         for (Object[] result : results) {
             DetalleVenta detalle = new DetalleVenta();
-            detalle.setIdDetalle((BigDecimal) result[0]);
-            detalle.setIdVenta((BigDecimal) result[1]);
-            detalle.setIdProducto((BigDecimal) result[2]);
-            detalle.setCantidad((BigDecimal) result[3]);
-            detalle.setPrecioUnitario((BigDecimal) result[4]);
+            detalle.setIdDetalle(((BigDecimal) result[0]).longValue());
+            detalle.setIdVenta(((BigDecimal) result[1]).longValue());
+            long productoId = ((BigDecimal) result[2]).longValue();
+            Producto producto = entityManager.find(Producto.class, productoId);
+            detalle.setProducto(producto);
+            detalle.setCantidad(((BigDecimal) result[3]).longValue());
+            detalle.setPrecioUnitario(((BigDecimal) result[4]).longValue());
             detalleventas.add(detalle);
         }
         return detalleventas;
