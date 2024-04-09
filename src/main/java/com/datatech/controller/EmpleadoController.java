@@ -33,11 +33,11 @@ public class EmpleadoController {
     @GetMapping
     public String empleados(Model model){
         var lista = empleadoService.getEmpleados();
-        var listaSucursales = sucursalService.getSucursal();
+        var listaSucursales = sucursalService.getSucursales();
         var listaCargos = cargoService.getCargos();
         model.addAttribute("empleados",lista);
-        model.addAttribute("sucursales", listaSucursales);
-        model.addAttribute("cargos", listaCargos);
+        model.addAttribute("sucursales",listaSucursales);
+        model.addAttribute("cargos",listaCargos);
         model.addAttribute("empleado",new Empleado());
         return "empleados/listado";
     }
@@ -47,7 +47,18 @@ public class EmpleadoController {
         empleadoService.crearEmpleado(empleado.getSucursal().getIdSucursal(), empleado.getCargo().getIdCargo(),
                 empleado.getFechaContratacion(), empleado.getNombre(), empleado.getApellido(),
                 empleado.getTelefono(), empleado.getEmail());
-        return "redirect:/categorias";
+        return "redirect:/empleados";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editarEmpleado(@PathVariable("id") Long idEmpleado, Model model) {
+        var empleado = empleadoService.getEmpleadoPorId(idEmpleado);
+        var listaSucursales = sucursalService.getSucursales();
+        var listaCargos = cargoService.getCargos();
+        model.addAttribute("empleado", empleado);
+        model.addAttribute("sucursales", listaSucursales);
+        model.addAttribute("cargos", listaCargos);
+        return "empleados/editar";
     }
     
     @PostMapping("/editar")
@@ -57,6 +68,7 @@ public class EmpleadoController {
                 empleado.getTelefono(), empleado.getEmail());
         return "redirect:/empleados";
     }
+
     
     @GetMapping("/eliminar/{id}")
     public String eliminarEmpleado(@PathVariable("id") Long idEmpleado) {

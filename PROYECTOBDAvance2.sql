@@ -118,13 +118,13 @@ CREATE TABLE tab_comentario(
 --- INSERTS ---
 
 -- Sucursal
-INSERT INTO tab_sucursal VALUES (1, 'DataTech San Pedro', 'San José', 'Montes de Oca', 'Av52 Calle4', '22025633', 'datatechsanpedro.com');
+INSERT INTO tab_sucursal VALUES (1, 'DataTech San Pedro', 'San Josï¿½', 'Montes de Oca', 'Av52 Calle4', '22025633', 'datatechsanpedro.com');
 INSERT INTO tab_sucursal VALUES (2, 'DataTech Alajuela', 'Alajuela', 'Alajuela', 'Av23 Calle1', '22789900', 'datatechalajuela.com');
-INSERT INTO tab_sucursal VALUES (3, 'DataTech Heredia', 'Heredia', 'Belén', 'Av47A Calle13', '22771100', 'datatechheredia.com');
-INSERT INTO tab_sucursal VALUES (4, 'DataTech Cartago', 'Cartago', 'Paraíso', 'Av78 Calle23', '22001033', 'datatechcartago.com');
-INSERT INTO tab_sucursal VALUES (5, 'DataTech Curridabat', 'San José', 'Central', 'Av14 Calle3', '22471039', 'datatechcurridabat.com');
+INSERT INTO tab_sucursal VALUES (3, 'DataTech Heredia', 'Heredia', 'Belï¿½n', 'Av47A Calle13', '22771100', 'datatechheredia.com');
+INSERT INTO tab_sucursal VALUES (4, 'DataTech Cartago', 'Cartago', 'Paraï¿½so', 'Av78 Calle23', '22001033', 'datatechcartago.com');
+INSERT INTO tab_sucursal VALUES (5, 'DataTech Curridabat', 'San Josï¿½', 'Central', 'Av14 Calle3', '22471039', 'datatechcurridabat.com');
 
--- Categoría
+-- Categorï¿½a
 INSERT INTO tab_categoria VALUES (1, 'Laptops');
 INSERT INTO tab_categoria VALUES (2, 'Monitores');
 INSERT INTO tab_categoria VALUES (3, 'Tablets');
@@ -133,25 +133,25 @@ INSERT INTO tab_categoria VALUES (5, 'Accesorios');
 
 -- Cliente
 INSERT INTO tab_cliente VALUES (1, 'Carlos', 'Perez', 'Rodriguez', 'carlosperez@gmail.com', '88591263', SYSDATE);
-INSERT INTO tab_cliente VALUES (2, 'Ana', 'García', 'López', 'anagarcia@gmail.com', '82345678', SYSDATE);
-INSERT INTO tab_cliente VALUES (3, 'Juan', 'Martínez', 'Sánchez', 'juanmartinez@gmail.com', '87654321', SYSDATE);
-INSERT INTO tab_cliente VALUES (4, 'María', 'Hernández', 'Fernández', 'mariahernandez@gmail.com', '73579246', SYSDATE);
-INSERT INTO tab_cliente VALUES (5, 'Pedro', 'López', 'Gómez', 'pedrolopez@gmail.com', '88765432', SYSDATE);
-INSERT INTO tab_cliente VALUES (6, 'Laura', 'Díaz', 'Pérez', 'lauradiaz@gmail.com', '84681357', SYSDATE);
-INSERT INTO tab_cliente VALUES (7, 'Luis', 'González', 'Martínez', 'luisgonzalez@gmail.com', '66925814', SYSDATE);
-INSERT INTO tab_cliente VALUES (8, 'Sofía', 'Rodríguez', 'García', 'sofiarodriguez@gmail.com', '88246137', SYSDATE);
-INSERT INTO tab_cliente VALUES (9, 'Diego', 'Sánchez', 'Jiménez', 'diegosanchez@gmail.com', '74185296', SYSDATE);
-INSERT INTO tab_cliente VALUES (10, 'Carmen', 'Pérez', 'Ruiz', 'carmenperez@gmail.com', '85935746', SYSDATE);
-INSERT INTO tab_cliente VALUES (11, 'Pablo', 'Muñoz', 'Alvarez', 'pablomunoz@gmail.com', '82348765', SYSDATE);
-INSERT INTO tab_cliente VALUES (12, 'Elena', 'Fernández', 'López', 'elenafdez@gmail.com', '88765431', SYSDATE);
-INSERT INTO tab_cliente VALUES (13, 'Javier', 'Martínez', 'González', 'javiermartinez@gmail.com', '74185296', SYSDATE);
-INSERT INTO tab_cliente VALUES (14, 'Marina', 'Sánchez', 'Díaz', 'marinasanchez@gmail.com', '62345678', SYSDATE);
-INSERT INTO tab_cliente VALUES (15, 'Roberto', 'García', 'Hernández', 'robertogarcia@gmail.com', '86925814', SYSDATE);
-INSERT INTO tab_cliente VALUES (16, 'Sara', 'Pérez', 'Muñoz', 'saraperez@gmail.com', '88246137', SYSDATE);
-INSERT INTO tab_cliente VALUES (17, 'Alejandro', 'López', 'Rodríguez', 'alejandrolpz@gmail.com', '74681357', SYSDATE);
-INSERT INTO tab_cliente VALUES (18, 'Lucía', 'Ruiz', 'Sánchez', 'luciaruiz@gmail.com', '83579246', SYSDATE);
-INSERT INTO tab_cliente VALUES (19, 'Miguel', 'Jiménez', 'Gómez', 'migueljimenez@gmail.com', '75935746', SYSDATE);
-INSERT INTO tab_cliente VALUES (20, 'Paula', 'Gómez', 'Pérez', 'paulagomez@gmail.com', '82348765', SYSDATE);
+INSERT INTO tab_cliente VALUES (2, 'Ana', 'Garcï¿½a', 'Lï¿½pez', 'anagarcia@gmail.com', '82345678', SYSDATE);
+INSERT INTO tab_cliente VALUES (3, 'Juan', 'Martï¿½nez', 'Sï¿½nchez', 'juanmartinez@gmail.com', '87654321', SYSDATE);
+INSERT INTO tab_cliente VALUES (4, 'Marï¿½a', 'Hernï¿½ndez', 'Fernï¿½ndez', 'mariahernandez@gmail.com', '73579246', SYSDATE);
+INSERT INTO tab_cliente VALUES (5, 'Pedro', 'Lï¿½pez', 'Gï¿½mez', 'pedrolopez@gmail.com', '88765432', SYSDATE);
+INSERT INTO tab_cliente VALUES (6, 'Laura', 'Dï¿½az', 'Pï¿½rez', 'lauradiaz@gmail.com', '84681357', SYSDATE);
+INSERT INTO tab_cliente VALUES (7, 'Luis', 'Gonzï¿½lez', 'Martï¿½nez', 'luisgonzalez@gmail.com', '66925814', SYSDATE);
+INSERT INTO tab_cliente VALUES (8, 'Sofï¿½a', 'Rodrï¿½guez', 'Garcï¿½a', 'sofiarodriguez@gmail.com', '88246137', SYSDATE);
+INSERT INTO tab_cliente VALUES (9, 'Diego', 'Sï¿½nchez', 'Jimï¿½nez', 'diegosanchez@gmail.com', '74185296', SYSDATE);
+INSERT INTO tab_cliente VALUES (10, 'Carmen', 'Pï¿½rez', 'Ruiz', 'carmenperez@gmail.com', '85935746', SYSDATE);
+INSERT INTO tab_cliente VALUES (11, 'Pablo', 'Muï¿½oz', 'Alvarez', 'pablomunoz@gmail.com', '82348765', SYSDATE);
+INSERT INTO tab_cliente VALUES (12, 'Elena', 'Fernï¿½ndez', 'Lï¿½pez', 'elenafdez@gmail.com', '88765431', SYSDATE);
+INSERT INTO tab_cliente VALUES (13, 'Javier', 'Martï¿½nez', 'Gonzï¿½lez', 'javiermartinez@gmail.com', '74185296', SYSDATE);
+INSERT INTO tab_cliente VALUES (14, 'Marina', 'Sï¿½nchez', 'Dï¿½az', 'marinasanchez@gmail.com', '62345678', SYSDATE);
+INSERT INTO tab_cliente VALUES (15, 'Roberto', 'Garcï¿½a', 'Hernï¿½ndez', 'robertogarcia@gmail.com', '86925814', SYSDATE);
+INSERT INTO tab_cliente VALUES (16, 'Sara', 'Pï¿½rez', 'Muï¿½oz', 'saraperez@gmail.com', '88246137', SYSDATE);
+INSERT INTO tab_cliente VALUES (17, 'Alejandro', 'Lï¿½pez', 'Rodrï¿½guez', 'alejandrolpz@gmail.com', '74681357', SYSDATE);
+INSERT INTO tab_cliente VALUES (18, 'Lucï¿½a', 'Ruiz', 'Sï¿½nchez', 'luciaruiz@gmail.com', '83579246', SYSDATE);
+INSERT INTO tab_cliente VALUES (19, 'Miguel', 'Jimï¿½nez', 'Gï¿½mez', 'migueljimenez@gmail.com', '75935746', SYSDATE);
+INSERT INTO tab_cliente VALUES (20, 'Paula', 'Gï¿½mez', 'Pï¿½rez', 'paulagomez@gmail.com', '82348765', SYSDATE);
 
 -- Cargo
 INSERT INTO tab_cargo VALUES (10, 'Gerente', 'Gerencia', 610000);
@@ -180,41 +180,41 @@ INSERT INTO tab_empleado VALUES (15, 5, 50, '21-06-2023', 'Daniel', 'Fernandez',
 -- Producto
 INSERT INTO tab_producto VALUES (1, 1, 'Laptop HP Pavilion', 'Potente laptop para uso diario', 539000);
 INSERT INTO tab_producto VALUES (2, 1, 'Laptop Dell Inspiron', 'Laptop confiable para trabajo y entretenimiento', 449000);
-INSERT INTO tab_producto VALUES (3, 1, 'Laptop Lenovo ThinkPad', 'Portátil resistente y seguro', 650000);
+INSERT INTO tab_producto VALUES (3, 1, 'Laptop Lenovo ThinkPad', 'Portï¿½til resistente y seguro', 650000);
 INSERT INTO tab_producto VALUES (4, 1, 'Laptop ASUS VivoBook', 'Laptop delgada y ligera con pantalla Full HD', 407000);
-INSERT INTO tab_producto VALUES (5, 1, 'Laptop Apple MacBook Air', 'La potencia de Apple en un diseño ultraportátil', 719000);
-INSERT INTO tab_producto VALUES (6, 2, 'Monitor LG UltraWide', 'Pantalla panorámica para una experiencia inmersiva', 239000);
-INSERT INTO tab_producto VALUES (7, 2, 'Monitor Samsung 4K', 'Calidad de imagen excepcional con resolución 4K UHD', 359900);
-INSERT INTO tab_producto VALUES (8, 2, 'Monitor ASUS Gaming', 'Monitor diseñado para la experiencia de juego', 290000);
-INSERT INTO tab_producto VALUES (9, 2, 'Monitor HP LED', 'Monitor LED de alta definición para tareas diarias', 119000);
-INSERT INTO tab_producto VALUES (10, 2, 'Monitor Dell UltraSharp', 'Precisión de color profesional para trabajos creativos', 477000);
+INSERT INTO tab_producto VALUES (5, 1, 'Laptop Apple MacBook Air', 'La potencia de Apple en un diseï¿½o ultraportï¿½til', 719000);
+INSERT INTO tab_producto VALUES (6, 2, 'Monitor LG UltraWide', 'Pantalla panorï¿½mica para una experiencia inmersiva', 239000);
+INSERT INTO tab_producto VALUES (7, 2, 'Monitor Samsung 4K', 'Calidad de imagen excepcional con resoluciï¿½n 4K UHD', 359900);
+INSERT INTO tab_producto VALUES (8, 2, 'Monitor ASUS Gaming', 'Monitor diseï¿½ado para la experiencia de juego', 290000);
+INSERT INTO tab_producto VALUES (9, 2, 'Monitor HP LED', 'Monitor LED de alta definiciï¿½n para tareas diarias', 119000);
+INSERT INTO tab_producto VALUES (10, 2, 'Monitor Dell UltraSharp', 'Precisiï¿½n de color profesional para trabajos creativos', 477000);
 INSERT INTO tab_producto VALUES (11, 3, 'Tablet Samsung Galaxy Tab', 'Tablet Android con pantalla brillante y delgada', 170500);
-INSERT INTO tab_producto VALUES (12, 3, 'Tablet Apple iPad', 'La tableta iOS más popular con potencia y versatilidad', 200000);
+INSERT INTO tab_producto VALUES (12, 3, 'Tablet Apple iPad', 'La tableta iOS mï¿½s popular con potencia y versatilidad', 200000);
 INSERT INTO tab_producto VALUES (13, 3, 'Tablet Amazon Fire', 'Tablet asequible con acceso a contenido de Amazon', 59000);
-INSERT INTO tab_producto VALUES (14, 3, 'Tablet Lenovo Tab', 'Tablet Android diseñada para entretenimiento móvil', 120000);
+INSERT INTO tab_producto VALUES (14, 3, 'Tablet Lenovo Tab', 'Tablet Android diseï¿½ada para entretenimiento mï¿½vil', 120000);
 INSERT INTO tab_producto VALUES (15, 3, 'Tablet Huawei MediaPad', 'Tablet con pantalla Full HD y sonido envolvente', 209000);
-INSERT INTO tab_producto VALUES (16, 4, 'Tarjeta gráfica NVIDIA GeForce', 'Gráficos potentes para juegos y aplicaciones profesionales', 140600);
+INSERT INTO tab_producto VALUES (16, 4, 'Tarjeta grï¿½fica NVIDIA GeForce', 'Grï¿½ficos potentes para juegos y aplicaciones profesionales', 140600);
 INSERT INTO tab_producto VALUES (17, 4, 'Procesador AMD Ryzen', 'Rendimiento de vanguardia para PC de escritorio', 230000);
-INSERT INTO tab_producto VALUES (18, 4, 'Memoria RAM Corsair', 'Módulos de memoria confiables para mejorar el rendimiento del sistema', 40000);
-INSERT INTO tab_producto VALUES (19, 4, 'Disco duro SSD Samsung', 'Almacenamiento rápido y confiable para tu PC', 77000);
-INSERT INTO tab_producto VALUES (20, 4, 'Placa base ASUS ROG', 'Placa base diseñada para entusiastas de los juegos', 100000);
-INSERT INTO tab_producto VALUES (21, 5, 'Teclado mecánico Razer', 'Teclado para juegos con interruptores mecánicos', 25000);
-INSERT INTO tab_producto VALUES (22, 5, 'Ratón inalámbrico Logitech', 'Ratón ergonómico para uso diario', 15000);
-INSERT INTO tab_producto VALUES (23, 5, 'Auriculares Sony Noise Cancelling', 'Auriculares inalámbricos con cancelación de ruido', 17500);
-INSERT INTO tab_producto VALUES (24, 5, 'Cargador inalámbrico Anker', 'Cargador rápido compatible con teléfonos inteligentes', 11000);
-INSERT INTO tab_producto VALUES (25, 5, 'Funda para portátil Case Logic', 'Funda acolchada para proteger tu portátil', 13900);
+INSERT INTO tab_producto VALUES (18, 4, 'Memoria RAM Corsair', 'Mï¿½dulos de memoria confiables para mejorar el rendimiento del sistema', 40000);
+INSERT INTO tab_producto VALUES (19, 4, 'Disco duro SSD Samsung', 'Almacenamiento rï¿½pido y confiable para tu PC', 77000);
+INSERT INTO tab_producto VALUES (20, 4, 'Placa base ASUS ROG', 'Placa base diseï¿½ada para entusiastas de los juegos', 100000);
+INSERT INTO tab_producto VALUES (21, 5, 'Teclado mecï¿½nico Razer', 'Teclado para juegos con interruptores mecï¿½nicos', 25000);
+INSERT INTO tab_producto VALUES (22, 5, 'Ratï¿½n inalï¿½mbrico Logitech', 'Ratï¿½n ergonï¿½mico para uso diario', 15000);
+INSERT INTO tab_producto VALUES (23, 5, 'Auriculares Sony Noise Cancelling', 'Auriculares inalï¿½mbricos con cancelaciï¿½n de ruido', 17500);
+INSERT INTO tab_producto VALUES (24, 5, 'Cargador inalï¿½mbrico Anker', 'Cargador rï¿½pido compatible con telï¿½fonos inteligentes', 11000);
+INSERT INTO tab_producto VALUES (25, 5, 'Funda para portï¿½til Case Logic', 'Funda acolchada para proteger tu portï¿½til', 13900);
 
 -- Proveedor
-INSERT INTO tab_proveedor VALUES (1, 'Juan', 'González', '22364455', 'juangonzalez@gmail.com');
-INSERT INTO tab_proveedor VALUES (2, 'María', 'Martínez', '88330211', 'mariamartinez@example.com');
-INSERT INTO tab_proveedor VALUES (3, 'Carlos', 'Hernández', '66773899', 'carlosperez@example.com');
-INSERT INTO tab_proveedor VALUES (4, 'Laura', 'Díaz', '77885766', 'lauragomez@example.com');
+INSERT INTO tab_proveedor VALUES (1, 'Juan', 'Gonzï¿½lez', '22364455', 'juangonzalez@gmail.com');
+INSERT INTO tab_proveedor VALUES (2, 'Marï¿½a', 'Martï¿½nez', '88330211', 'mariamartinez@example.com');
+INSERT INTO tab_proveedor VALUES (3, 'Carlos', 'Hernï¿½ndez', '66773899', 'carlosperez@example.com');
+INSERT INTO tab_proveedor VALUES (4, 'Laura', 'Dï¿½az', '77885766', 'lauragomez@example.com');
 INSERT INTO tab_proveedor VALUES (5, 'Alejandro', 'Ruiz', '88223344', 'alejandromartinez@example.com');
-INSERT INTO tab_proveedor VALUES (6, 'Ana', 'Sánchez', '66445066', 'anajimenez@example.com');
-INSERT INTO tab_proveedor VALUES (7, 'Sofía', 'Fernández', '87637788', 'sofiagarcia@example.com');
-INSERT INTO tab_proveedor VALUES (8, 'Pedro', 'Gómez', '71881900', 'pedroruiz@example.com');
-INSERT INTO tab_proveedor VALUES (9, 'Lucía', 'Gutiérrez', '64113293', 'luciatorres@example.com');
-INSERT INTO tab_proveedor VALUES (10, 'Daniel', 'Martín', '89001122', 'danielsanchez@example.com');
+INSERT INTO tab_proveedor VALUES (6, 'Ana', 'Sï¿½nchez', '66445066', 'anajimenez@example.com');
+INSERT INTO tab_proveedor VALUES (7, 'Sofï¿½a', 'Fernï¿½ndez', '87637788', 'sofiagarcia@example.com');
+INSERT INTO tab_proveedor VALUES (8, 'Pedro', 'Gï¿½mez', '71881900', 'pedroruiz@example.com');
+INSERT INTO tab_proveedor VALUES (9, 'Lucï¿½a', 'Gutiï¿½rrez', '64113293', 'luciatorres@example.com');
+INSERT INTO tab_proveedor VALUES (10, 'Daniel', 'Martï¿½n', '89001122', 'danielsanchez@example.com');
 
 -- Inventario
 INSERT INTO tab_inventario VALUES (1, 1, 1, 1, 10);
@@ -316,21 +316,21 @@ INSERT INTO tab_inventario VALUES (96, 5, 25, 2, 2);
 INSERT INTO tab_inventario VALUES (97, 5, 1, 3, 8);
 
 -- Comentario
-INSERT INTO tab_comentario VALUES (1, 1, 1, 4, 'Excelente laptop HP Pavilion, muy rápido y confiable.', '10-05-2023');
+INSERT INTO tab_comentario VALUES (1, 1, 1, 4, 'Excelente laptop HP Pavilion, muy rï¿½pido y confiable.', '10-05-2023');
 INSERT INTO tab_comentario VALUES (2, 2, 2, 5, 'Me encanta esta laptop Dell Inspiron, es perfecta para trabajar y para jugar.', '15-08-2023');
-INSERT INTO tab_comentario VALUES (3, 3, 6, 3, 'El monitor LG UltraWide es bueno, pero la calidad de imagen podría ser mejor.', '20-07-2023');
-INSERT INTO tab_comentario VALUES (4, 4, 11, 5, 'La tablet Samsung Galaxy Tab es increíble, la mejor que he tenido.', '25-09-2023');
-INSERT INTO tab_comentario VALUES (5, 5, 4, 2, 'No estoy satisfecho con la laptop ASUS VivoBook, esperaba más calidad.', '30-06-2023');
+INSERT INTO tab_comentario VALUES (3, 3, 6, 3, 'El monitor LG UltraWide es bueno, pero la calidad de imagen podrï¿½a ser mejor.', '20-07-2023');
+INSERT INTO tab_comentario VALUES (4, 4, 11, 5, 'La tablet Samsung Galaxy Tab es increï¿½ble, la mejor que he tenido.', '25-09-2023');
+INSERT INTO tab_comentario VALUES (5, 5, 4, 2, 'No estoy satisfecho con la laptop ASUS VivoBook, esperaba mï¿½s calidad.', '30-06-2023');
 INSERT INTO tab_comentario VALUES (6, 6, 5, 4, 'El MacBook Air es muy ligero y potente, ideal para llevar a todas partes.', '12-04-2023');
 INSERT INTO tab_comentario VALUES (7, 7, 6, 5, 'Este monitor LG UltraWide es genial para multitarea, lo recomiendo.', '05-10-2023');
 INSERT INTO tab_comentario VALUES (8, 8, 22, 3, 'Excelente!', '18-11-2023');
 INSERT INTO tab_comentario VALUES (9, 9, 16, 5, 'Muy buena calidad.', '01-12-2023');
-INSERT INTO tab_comentario VALUES (10, 10, 9, 3, 'El monitor HP LED es bueno para el precio, pero esperaba más resolución.', '10-11-2023');
-INSERT INTO tab_comentario VALUES (11, 11, 10, 5, 'El Dell UltraSharp tiene una precisión de color impresionante.', '20-09-2023');
+INSERT INTO tab_comentario VALUES (10, 10, 9, 3, 'El monitor HP LED es bueno para el precio, pero esperaba mï¿½s resoluciï¿½n.', '10-11-2023');
+INSERT INTO tab_comentario VALUES (11, 11, 10, 5, 'El Dell UltraSharp tiene una precisiï¿½n de color impresionante.', '20-09-2023');
 INSERT INTO tab_comentario VALUES (12, 12, 3, 3, 'La tablet Apple iPad tiene una pantalla brillante, pero se ralentiza a veces.', '14-08-2023');
 INSERT INTO tab_comentario VALUES (13, 13, 12, 5, 'El iPad es simplemente perfecto, sin quejas.', '26-07-2023');
-INSERT INTO tab_comentario VALUES (14, 14, 13, 3, 'Buen tablet, pero la duración de la batería podría ser mejor.', '30-10-2023');
-INSERT INTO tab_comentario VALUES (15, 15, 25, 5, 'La funda para portátil Case Logic es excelente para proteger mi portátil.', '08-09-2023');
+INSERT INTO tab_comentario VALUES (14, 14, 13, 3, 'Buen tablet, pero la duraciï¿½n de la baterï¿½a podrï¿½a ser mejor.', '30-10-2023');
+INSERT INTO tab_comentario VALUES (15, 15, 25, 5, 'La funda para portï¿½til Case Logic es excelente para proteger mi portï¿½til.', '08-09-2023');
 
 -- Venta
 INSERT INTO tab_venta VALUES (1, 1, 539000, '05-05-2023');
@@ -412,8 +412,7 @@ END sp_insertar_sucursal;
 
 CREATE OR REPLACE PROCEDURE sp_insertar_empleado(
     v_nombre IN VARCHAR2,
-    v_apellido1 IN VARCHAR2,
-    v_apellido2 IN VARCHAR2,
+    v_apellido IN VARCHAR2,
     v_email IN VARCHAR2,
     v_telefono IN VARCHAR2,
     v_fecha_contratacion IN DATE,
@@ -423,7 +422,7 @@ CREATE OR REPLACE PROCEDURE sp_insertar_empleado(
 IS
 BEGIN
     INSERT INTO tab_empleado (id_empleado, id_sucursal, id_cargo, fecha_contratacion, nombre, apellido, telefono, email)
-    VALUES ((SELECT NVL(MAX(id_empleado), 0) + 1 FROM tab_empleado), v_id_sucursal, v_id_cargo, v_fecha_contratacion, v_nombre, v_apellido1 || ' ' || v_apellido2, v_telefono, v_email);
+    VALUES ((SELECT NVL(MAX(id_empleado), 0) + 1 FROM tab_empleado), v_id_sucursal, v_id_cargo, v_fecha_contratacion, v_nombre, v_apellido, v_telefono, v_email);
     COMMIT;
 END sp_insertar_empleado;
 
@@ -539,7 +538,7 @@ BEGIN
         WHEN 'tab_comentario' THEN
             v_columna_id := 'id_comentario';
         ELSE
-            DBMS_OUTPUT.PUT_LINE('Tabla no válida');
+            DBMS_OUTPUT.PUT_LINE('Tabla no vï¿½lida');
             RETURN;
     END CASE;
     v_select := 'SELECT * FROM ' || v_tabla || ' WHERE ' || v_columna_id || ' = ' || v_id;
@@ -753,7 +752,7 @@ BEGIN
             v_columna_id := 'id_producto';
         ELSE
         
-            DBMS_OUTPUT.PUT_LINE('Tabla no válida');
+            DBMS_OUTPUT.PUT_LINE('Tabla no vï¿½lida');
             RETURN;
     END CASE;
     

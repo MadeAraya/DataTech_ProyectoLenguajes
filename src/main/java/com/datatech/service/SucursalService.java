@@ -6,7 +6,7 @@ import com.datatech.domain.Sucursal;
 
 
 public interface SucursalService {
-    public List<Sucursal> getSucursal();
+    public List<Sucursal> getSucursales();
     public Sucursal getSucursalPorId(Long idSucursal);
     public void crearSucursal (String nombre, String provincia, String canton,
             String direccion, String telefono, String sitioWeb);

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Listado de Clientes</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+    <div th:fragment="contenidoSucursales" class="sucursales">
+        <div class="container mt-4">
+            <h2>Gestión de Sucursales</h2>
+
+            <!-- Botón para abrir el formulario de agregar sucursal -->
+            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarSucursalModal">
+                Agregar Sucursal
+            </button>
+
+            <!-- Modal para agregar sucursal -->
+            <div class="modal fade" id="agregarSucursalModal" tabindex="-1" role="dialog"
+                aria-labelledby="agregarSucursalModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="agregarSucursalModalLabel">Agregar Sucursal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario para agregar sucursal -->
+                            <form th:action="@{/sucursales/agregar}" th:object="${sucursal}" method="post">
+                                <div class="form-group">
+                                    <label for="nombreSucursal">Nombre</label>
+                                    <input type="text" class="form-control" th:field="*{nombre}"
+                                        placeholder="Ingrese el nombre de la sucursal">
+                                </div>
+                                <div class="form-group">
+                                    <label for="provinciaSucursal">Provincia</label>
+                                    <select class="form-control" th:field="*{provincia}">
+                                        <option value="" selected>Seleccione una provincia</option>
+                                        <option th:value="'San José'">San José</option>
+                                        <option th:value="Alajuela">Alajuela</option>
+                                        <option th:value="Cartago">Cartago</option>
+                                        <option th:value="Heredia">Heredia</option>
+                                        <option th:value="Guanacaste">Guanacaste</option>
+                                        <option th:value="Puntarenas">Puntarenas</option>
+                                        <option th:value="Limón">Limón</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cantonSucursal">Cantón</label>
+                                    <input type="text" class="form-control" th:field="*{canton}"
+                                        placeholder="Ingrese el cantón de la sucursal">
+                                </div>
+                                <div class="form-group">
+                                    <label for="direccionSucursal">Dirección</label>
+                                    <input type="text" class="form-control" th:field="*{direccion}"
+                                        placeholder="Ingrese la dirección de la sucursal">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefonoSucursal">Teléfono</label>
+                                    <input type="text" class="form-control" th:field="*{telefono}"
+                                        placeholder="Ingrese el teléfono de la sucursal">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailSucursal">Website</label>
+                                    <input type="text" class="form-control" th:field="*{sitioWeb}"
+                                        placeholder="Ingrese el sitio web">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Sucursal</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de listado de sucursales -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Provincia</th>
+                        <th scope="col">Cantón</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sucursal : ${sucursales}">
+                        <th scope="row" th:text="${sucursal.idSucursal}">1</th>
+                        <td th:text="${sucursal.nombre}">Nombre de la Sucursal</td>
+                        <td th:text="${sucursal.provincia}">Provincia de la Sucursal</td>
+                        <td th:text="${sucursal.canton}">Cantón de la Sucursal</td>
+                        <td th:text="${sucursal.direccion}">Dirección de la Sucursal</td>
+                        <td th:text="${sucursal.telefono}">Teléfono de la Sucursal</td>
+                        <td th:text="${sucursal.sitioWeb}">Website</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary"
+                                th:href="@{/sucursales/editar/{id}(id=${sucursal.idSucursal})}"><i
+                                    class="fas fa-edit"></i>Editar</a>
+
+                            <a class="btn btn-sm btn-danger"
+                                th:href="@{/sucursales/eliminar/{id}(id=${sucursal.idSucursal})}">Eliminar</a>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div th:fragment="contenidoEditarSucursal">
+        <form th:action="@{/sucursales/editar}" th:object="${sucursal}" method="post">
+            <input type="hidden" th:field="*{idSucursal}" />
+            <div class="form-group">
+                <label for="nombreSucursal">Nombre</label>
+                <input type="text" class="form-control" th:field="*{nombre}"
+                    placeholder="Ingrese el nombre de la sucursal">
+            </div>
+            <div class="form-group">
+                <label for="provinciaSucursal">Provincia</label>
+                <select class="form-control" th:field="*{provincia}">
+                    <option value="" selected>Seleccione una provincia</option>
+                    <option th:value="'San José'">San José</option>
+                    <option th:value="Alajuela">Alajuela</option>
+                    <option th:value="Cartago">Cartago</option>
+                    <option th:value="Heredia">Heredia</option>
+                    <option th:value="Guanacaste">Guanacaste</option>
+                    <option th:value="Puntarenas">Puntarenas</option>
+                    <option th:value="Limón">Limón</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cantonSucursal">Cantón</label>
+                <input type="text" class="form-control" th:field="*{canton}"
+                    placeholder="Ingrese el cantón de la sucursal">
+            </div>
+            <div class="form-group">
+                <label for="direccionSucursal">Dirección</label>
+                <input type="text" class="form-control" th:field="*{direccion}"
+                    placeholder="Ingrese la dirección de la sucursal">
+            </div>
+            <div class="form-group">
+                <label for="telefonoSucursal">Teléfono</label>
+                <input type="text" class="form-control" th:field="*{telefono}"
+                    placeholder="Ingrese el teléfono de la sucursal">
+            </div>
+            <div class="form-group">
+                <label for="sitioWebSucursal">Sitio Web</label>
+                <input type="text" class="form-control" th:field="*{sitioWeb}"
+                    placeholder="Ingrese el sitio web de la sucursal">
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+    </div>
+    
+
+
+</body>
+
+
+</html>

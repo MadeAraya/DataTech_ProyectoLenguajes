@@ -34,18 +34,19 @@ public class ProveedorServiceImpl implements ProveedorService {
     }
 
     @Override
-@Transactional(readOnly = true)
-public Proveedor getProveedorPorId(Long idProveedor) {
-    StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos_porID", Proveedor.class);
-    query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
-    query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
-    query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);
-    query.setParameter(2, "tab_proveedor");
-    query.setParameter(3, idProveedor);
-    query.execute();
-    List<Proveedor> result = query.getResultList();
-    return result.isEmpty() ? null : result.get(0);
-}
+    @Transactional(readOnly = true)
+    public Proveedor getProveedorPorId(Long idProveedor) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos_porID",
+                Proveedor.class);
+        query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
+        query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);
+        query.setParameter(2, "tab_proveedor");
+        query.setParameter(3, idProveedor);
+        query.execute();
+        List<Proveedor> result = query.getResultList();
+        return result.isEmpty() ? null : result.get(0);
+    }
 
     @Override
     @Transactional

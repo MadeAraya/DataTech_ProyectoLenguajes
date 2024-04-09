@@ -17,17 +17,17 @@ import com.datatech.domain.Sucursal;
 import com.datatech.service.SucursalService;
 
 @Controller
-@RequestMapping("/sucursal")
+@RequestMapping("/sucursales")
 public class SucursalController {
     @Autowired
     private SucursalService sucursalService;
     
     @GetMapping
     public String sucursal(Model model){
-        var lista = sucursalService.getSucursal();
-        model.addAttribute("sucursal",lista);
+        var lista = sucursalService.getSucursales();
+        model.addAttribute("sucursales",lista);
         model.addAttribute("sucursal",new Sucursal());
-        return "sucursal/listado";
+        return "sucursales/listado";
     }
     
     @PostMapping("/agregar")
@@ -35,18 +35,25 @@ public class SucursalController {
         sucursalService.crearSucursal( sucursal.getNombre(),
                 sucursal.getProvincia(), sucursal.getCanton(), sucursal.getDireccion(),
                 sucursal.getTelefono(), sucursal.getSitioWeb());
-        return "redirect:/categorias";
+        return "redirect:/sucursales";
     }
     
+    @GetMapping("/editar/{id}")
+    public String editarSucursal(@PathVariable("id") Long idSucursal, Model model) {
+        var sucursal = sucursalService.getSucursalPorId(idSucursal);
+        model.addAttribute("sucursal", sucursal);
+        return "sucursales/editar";
+    }
+
     @PostMapping("/editar")
     public String actualizarSucursal(@ModelAttribute Sucursal sucursal) {
         sucursalService.actualizarSucursal(sucursal);
-        return "redirect:/sucursal";
+        return "redirect:/sucursales";
     }
     
     @GetMapping("/eliminar/{id}")
     public String eliminarSucursal(@PathVariable("id") Long idSucursal) {
         sucursalService.eliminarSucursal(idSucursal);
-        return "redirect:/sucursal";
+        return "redirect:/sucursales";
     }
 }

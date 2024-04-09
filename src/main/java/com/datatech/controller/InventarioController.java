@@ -52,7 +52,7 @@ public class InventarioController {
     public String inventarios(Model model) {
         var lista = inventarioService.getInventario();
         var listaCategorias = categoriaService.getCategorias();
-        var listaSucursales = sucursalService.getSucursal();
+        var listaSucursales = sucursalService.getSucursales();
         var listaProveedores = proveedorService.getProveedores();
         var listaProductos = productoService.getProductos();
         model.addAttribute("inventarios", lista);
@@ -91,7 +91,7 @@ public class InventarioController {
     public String editar(@PathVariable("id") Long idInventario, Model model) {
         var inventario = inventarioService.getInventarioPorId(idInventario);
         var listaCategorias = categoriaService.getCategorias();
-        var listaSucursales = sucursalService.getSucursal();
+        var listaSucursales = sucursalService.getSucursales();
         var listaProveedores = proveedorService.getProveedores();
         var listaProductos = productoService.getProductos();
         model.addAttribute("inventario", inventario);
