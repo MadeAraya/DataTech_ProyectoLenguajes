@@ -161,11 +161,11 @@ INSERT INTO tab_cargo VALUES (40, 'Reclutador', 'Recursos Humanos', 585000);
 INSERT INTO tab_cargo VALUES (50, 'Guarda', 'Seguridad', 390000);
 
 -- Empleado
-INSERT INTO tab_empleado VALUES (1, 1, 10, '03-03-2020', 'Antonio', 'Estrada', '88594063', 'antonioestrada@gmail.com');
-INSERT INTO tab_empleado VALUES (2, 1, 20, '05-03-2021', 'Pamela', 'Gutierrez', '77594063', 'pamegutierrez@gmail.com'); 
+INSERT INTO tab_empleado VALUES (1, 1, 10, '03-MAR-2020', 'Antonio', 'Estrada', '88594063', 'antonioestrada@gmail.com');
+INSERT INTO tab_empleado VALUES (2, 1, 20, '05-MAR-2021', 'Pamela', 'Gutierrez', '77594063', 'pamegutierrez@gmail.com'); 
 INSERT INTO tab_empleado VALUES (3, 1, 20, '01-08-2022', 'Johel', 'Mena', '88594022', 'johelmena@gmail.com'); 
-INSERT INTO tab_empleado VALUES (4, 2, 10, '19-03-2019', 'Luis', 'Lopez', '66594063', 'luislopez@gmail.com');
-INSERT INTO tab_empleado VALUES (5, 2, 20, '28-03-2021', 'Carlos', 'Mora', '77537063', 'carlosmora@gmail.com'); 
+INSERT INTO tab_empleado VALUES (4, 2, 10, '19-MAR-2019', 'Luis', 'Lopez', '66594063', 'luislopez@gmail.com');
+INSERT INTO tab_empleado VALUES (5, 2, 20, '28-MAR-2021', 'Carlos', 'Mora', '77537063', 'carlosmora@gmail.com'); 
 INSERT INTO tab_empleado VALUES (6, 2, 30, '11-05-2022', 'Alex', 'Mena', '8850000', 'axelmena@gmail.com'); 
 INSERT INTO tab_empleado VALUES (7, 3, 10, '20-04-2016', 'Josue', 'Sequeira', '66577063', 'josuesequeira@gmail.com');
 INSERT INTO tab_empleado VALUES (8, 3, 20, '10-02-2018', 'Nicolas', 'Mendez', '77552033', 'nicolasmendez@gmail.com'); 
@@ -427,6 +427,19 @@ BEGIN
     COMMIT;
 END sp_insertar_empleado;
 
+CREATE OR REPLACE PROCEDURE sp_insertar_producto(
+    v_id_categoria IN NUMBER,
+    v_nombre IN VARCHAR2,
+    v_descripcion IN VARCHAR2,
+    v_precio_unitario IN NUMBER
+)
+IS
+BEGIN
+    INSERT INTO tab_producto (id_producto, id_categoria, nombre, descripcion, precio_unitario)
+    VALUES ((SELECT NVL(MAX(id_producto), 0) + 1 FROM tab_producto), v_id_categoria, v_nombre, v_descripcion, v_precio_unitario);
+    COMMIT;
+END sp_insertar_producto;
+
 CREATE OR REPLACE PROCEDURE sp_insertar_proveedor(
     v_nombre IN VARCHAR2,
     v_apellido IN VARCHAR2,
@@ -493,6 +506,46 @@ BEGIN
     OPEN v_cursor FOR v_select;
     
 END sp_obtener_datos;
+
+create or replace PROCEDURE sp_obtener_datos_porID(
+    v_cursor OUT SYS_REFCURSOR,
+    v_tabla VARCHAR2,
+    v_id NUMBER
+)
+IS
+    v_select VARCHAR2(1000);
+    v_columna_id VARCHAR2(100);   
+BEGIN
+
+    CASE v_tabla
+        WHEN 'tab_empleado' THEN
+            v_columna_id := 'id_empleado';
+        WHEN 'tab_proveedor' THEN
+            v_columna_id := 'id_proveedor';
+        WHEN 'tab_sucursal' THEN
+            v_columna_id := 'id_sucursal';
+        WHEN 'tab_categoria' THEN
+            v_columna_id := 'id_categoria';
+        WHEN 'tab_inventario' THEN
+            v_columna_id := 'id_inventario';
+        WHEN 'tab_producto' THEN
+            v_columna_id := 'id_producto';
+        WHEN 'tab_detalle_venta' THEN
+            v_columna_id := 'id_detalle';
+        WHEN 'tab_venta' THEN
+            v_columna_id := 'id_venta';
+        WHEN 'tab_cliente' THEN
+            v_columna_id := 'id_cliente';
+        WHEN 'tab_comentario' THEN
+            v_columna_id := 'id_comentario';
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Tabla no válida');
+            RETURN;
+    END CASE;
+    v_select := 'SELECT * FROM ' || v_tabla || ' WHERE ' || v_columna_id || ' = ' || v_id;
+    OPEN v_cursor FOR v_select;
+
+END sp_obtener_datos_porID;
 
 ---------------------- ACTUALIZAR -----------------------
 CREATE OR REPLACE PROCEDURE sp_actualizar_categoria(
@@ -575,6 +628,24 @@ BEGIN
     COMMIT;
 END sp_actualizar_empleado;
 
+CREATE OR REPLACE PROCEDURE sp_actualizar_producto(
+    v_id_producto IN NUMBER,
+    v_id_categoria IN NUMBER,
+    v_nombre IN VARCHAR2,
+    v_descripcion IN VARCHAR2,
+    v_precio_unitario IN NUMBER
+)
+IS
+BEGIN
+    UPDATE tab_producto
+    SET id_categoria = v_id_categoria,
+        nombre = v_nombre,
+        descripcion = v_descripcion,
+        precio_unitario = v_precio_unitario
+    WHERE id_producto = v_id_producto;
+    COMMIT;
+END sp_actualizar_producto;
+
 CREATE OR REPLACE PROCEDURE sp_actualizar_proveedor(
     v_id_proveedor IN NUMBER,
     v_nombre IN VARCHAR2,
@@ -629,6 +700,8 @@ BEGIN
     COMMIT;
 END sp_actualizar_detalle_venta;
 
+-------sp_actualizar_cargo(falta)-----
+
 CREATE OR REPLACE PROCEDURE sp_actualizar_comentario(
     v_id_comentario IN NUMBER,
     v_id_cliente IN NUMBER,
@@ -676,11 +749,56 @@ BEGIN
             v_columna_id := 'id_cliente';
         WHEN 'tab_comentario' THEN
             v_columna_id := 'id_comentario';
+        WHEN 'tab_producto' THEN
+            v_columna_id := 'id_producto';
         ELSE
+        
             DBMS_OUTPUT.PUT_LINE('Tabla no válida');
             RETURN;
     END CASE;
     
     EXECUTE IMMEDIATE 'DELETE FROM ' || v_tabla || ' WHERE ' || v_columna_id || ' = :1' USING v_id;
     DBMS_OUTPUT.PUT_LINE('Registro eliminado correctamente de ' || v_tabla);
+END;
+
+---------------------- Triggers -----------------------
+
+CREATE OR REPLACE TRIGGER ELIM_SUCURSAL
+BEFORE DELETE ON tab_sucursal
+FOR EACH ROW
+
+BEGIN
+    DELETE FROM tab_empleado WHERE id_sucursal = :OLD.id_sucursal;
+    
+    DELETE FROM tab_inventario WHERE id_sucursal = :OLD.id_sucursal;
+
+END;
+
+CREATE OR REPLACE TRIGGER ELIM_PROVEEDOR
+BEFORE DELETE ON tab_proveedor
+FOR EACH ROW
+
+BEGIN
+    DELETE FROM tab_inventario WHERE id_proveedor = :OLD.id_proveedor;
+
+END;
+
+CREATE OR REPLACE TRIGGER ELIM_PRODUCTO
+BEFORE DELETE ON tab_producto
+FOR EACH ROW
+
+BEGIN
+    DELETE FROM tab_inventario WHERE id_producto = :OLD.id_producto;
+
+END;
+
+-----Tener cuidado con este que borra todos los productos--------
+
+CREATE OR REPLACE TRIGGER ELIM_CATEGORIA
+BEFORE DELETE ON tab_categoria
+FOR EACH ROW
+
+BEGIN
+    DELETE FROM tab_producto WHERE id_categoria = :OLD.id_categoria;
+
 END;
