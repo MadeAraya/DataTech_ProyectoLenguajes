@@ -2,6 +2,7 @@
 package com.datatech.service.impl;
 
 import com.datatech.dao.VentaDao;
+import com.datatech.domain.Cliente;
 import com.datatech.domain.Venta;
 import com.datatech.service.VentaService;
 import java.math.BigDecimal;
@@ -46,9 +47,11 @@ public class VentaServiceImpl implements VentaService {
         List<Venta> ventas = new ArrayList<>();
         for (Object[] result : results) {
             Venta venta = new Venta();
-            venta.setIdVenta((BigDecimal) result[0]);
-            venta.setIdCliente((BigDecimal) result[1]);
-            venta.setTotalPagado((BigDecimal) result[2]);
+            venta.setIdVenta(((BigDecimal) result[0]).longValue());
+            long clienteId = ((BigDecimal) result[1]).longValue();
+            Cliente cliente = entityManager.find(Cliente.class, clienteId);
+            venta.setCliente(cliente);
+            venta.setTotalPagado(((BigDecimal) result[2]).doubleValue());
             Timestamp timestamp = (Timestamp) result[3];
             LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
             venta.setFecha(Date.valueOf(localDate));
@@ -70,9 +73,11 @@ public class VentaServiceImpl implements VentaService {
         List<Venta> ventas = new ArrayList<>();
         for (Object[] result : results) {
             Venta venta = new Venta();
-            venta.setIdVenta((BigDecimal) result[0]);
-            venta.setIdCliente((BigDecimal) result[1]);
-            venta.setTotalPagado((BigDecimal) result[2]);
+            venta.setIdVenta(((BigDecimal) result[0]).longValue());
+            long clienteId = ((BigDecimal) result[1]).longValue();
+            Cliente cliente = entityManager.find(Cliente.class, clienteId);
+            venta.setCliente(cliente);
+            venta.setTotalPagado(((BigDecimal) result[2]).doubleValue());
             Timestamp timestamp = (Timestamp) result[3];
             LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
             venta.setFecha(Date.valueOf(localDate));

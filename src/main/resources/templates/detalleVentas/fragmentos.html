@@ -15,42 +15,181 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </style>
     </head>
     <body>
-        <div th:fragment="venta" class="detalleVentas">
+        <div th:fragment="detalleVenta" class="detalleVentas">
             <h2></h2>
             <h2>Detalle de Venta</h2>
-            
+
             <div th:each="venta : ${ventas}" class="border border-secondary p-3 rounded w-75">
-                <div class="d-flex flex-row mb-3 gap-3 w-100"> 
-                <div class="p-1 border border-success-subtle rounded"><p>ID Venta: <span th:text="${venta.idVenta}"></span></p></div>
-                <div class="p-1 border border-success-subtle rounded"><p>Cliente: <span th:text="${venta.idCliente}"></span></p></div>
-                <div class="p-1 border border-success-subtle rounded"><p>Total Pagado: <span th:text="${venta.totalPagado}"></span></p></div>
-                <div class="p-1 border border-success-subtle rounded"><p>Fecha: <span th:text="${venta.fecha}"></span></p></div>
-                <div class="p-1 btn btn-success" style="margin-left: 350px;"><p>Editar</p></div>
-                <div class="p-1 btn btn-danger"><p>Eliminar</p></div>
+                <div th:with="cliente = ${venta.cliente}">
+                    <div class="d-flex flex-row mb-3 gap-4 w-100"> 
+                        <div class="p-1"><p>ID Venta: <span th:text="${venta.idVenta}"></span></p></div>
+                        <div class="p-1"><p>ID Cliente: <span th:text="${venta.cliente.idCliente}"></span></p></div>
+                        <div class="p-1"><p>Nombre: <span th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido1}"></span></p></div>
+                        <div class="p-1"><p>Total Pagado: <span th:text="${venta.totalPagado}"></span></p></div>
+                        <div class="p-1"><p>Fecha: <span th:text="${venta.fecha}"></span></p></div>
+                        <div class="p-1 btn btn-primary" style="margin-left: 100px;"> <a style="color:white;" th:href="@{'/editarDetalleVenta?id=' + ${venta.idVenta}}">Editar</a></div>
+                        <div class="p-1 btn btn-danger"><p>Eliminar</p></div>
+                    </div>
                 </div>
                 <div class="col-md-3 w-100">   
-                
-            <table class="table border rounded">
-                <h4>Detalle Productos</h4>
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">ID Producto</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Precio Unitario</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    <tr th:each="detalleVenta, iterStat : ${detalleVentas}" th:if="${detalleVenta.idVenta} == ${venta.idVenta}">
+
+                    <table class="table border rounded">
+                        <h4>Detalle Productos</h4>
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ID Producto</th>
+                                <th scope="col">Nombre Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio Unitario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr th:each="detalleVenta, iterStat : ${detalleVentas}" th:if="${detalleVenta.idVenta} == ${venta.idVenta}">
+                        <div th:with="producto = ${detalleVenta.producto}"/>
                         <th scope="row" th:text="${iterStat.count}">1</th>
-                        <td th:text="${detalleVenta.idProducto}">ID Producto</td>
+                        <td th:text="${detalleVenta.producto.idProducto}">ID Producto</td>
+                        <td th:text="${detalleVenta.producto.nombre}">Nombre producto</td>
                         <td th:text="${detalleVenta.cantidad}">Cantidad</td>
                         <td th:text="${detalleVenta.precioUnitario}">Precio Unitario</td>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+        <div th:fragment="editarVenta" class="editarVentas">
+            <h2></h2>
+            <h2>Detalle de Venta</h2>
+            <div th:each="venta : ${ventas}" class="border border-secondary p-3 rounded w-75">
+                <div th:with="cliente = ${venta.cliente}">
+                    <div class="d-flex flex-row mb-3 gap-4 w-100">
+                        <div class="p-1">
+                            <p>ID Venta: <span th:text="${venta.idVenta}"></span>
+                            </p>
+                        </div>
+                        <div class="p-1">
+                            <p>ID Cliente: <span th:text="${venta.cliente.idCliente}"></span>
+                            </p>
+                        </div>
+                        <div class="p-1">
+                            <p>Nombre: <span th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido1}"></span>
+                            </p>
+                        </div>
+                        <div class="p-1">
+                            <p>Total Pagado: <span th:text="${venta.totalPagado}"></span>
+                            </p>
+                        </div>
+                        <div class="p-1">
+                            <p>Fecha: <span th:text="${venta.fecha}"></span>
+                            </p>
+                        </div>
+                        <div class="p-1 btn btn-primary" style="margin-left: 100px;">
+                            <a style="color:white;" th:href="@{'/agregarProductoDV?id=' + ${venta.idVenta}}">Agregar producto</a>
+                        </div>
+                        <div class="p-1 btn btn-success">
+                            <a style="color:white;" th:href=" @{'/detalleVenta?id=' + ${venta.idVenta}}">Terminé mis cambios</a>
+                        </div>
+                        <div class="p-1 btn btn-danger">
+                            <p>Eliminar</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 w-100">
+                    <table class="table border rounded">
+                        <h4>Detalle Productos</h4>
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ID Producto</th>
+                                <th scope="col">Nombre Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio Unitario</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="detalleVenta, iterStat : ${detalleVentas}" th:if="${detalleVenta.idVenta} == ${venta.idVenta}">
+                        <form th:action="@{/detalleVenta/producto/actualizar}" method="POST" class="was-validated" enctype="multipart/form-data">
+                            <input type="hidden" name="idDetalle" th:value="${detalleVenta.idDetalle}" />
+                            <input type="hidden" name="idVenta" th:value="${venta.idVenta}" />
+                            <input type="hidden" name="idProducto" th:value="${detalleVenta.producto.idProducto}" />
+                            <td th:text="${iterStat.count}">1</td>
+                            <td th:text="${detalleVenta.producto.idProducto}">ID Producto</td>
+                            <td th:text="${detalleVenta.producto.nombre}">Nombre producto</td>
+                            <td>
+                                <select name="cantidad" id="cantidad">
+                                    <option value="${detalleVenta.cantidad}" th:text="${detalleVenta.cantidad}"></option>
+                                    <option th:each="i : ${#numbers.sequence(1, 15)}" 
+                                            th:value="${i}" 
+                                            th:text="${i}" 
+                                            th:unless="${i == detalleVenta.cantidad}"></option>
+                                </select>
+                            </td>
+                            <td th:text="${detalleVenta.precioUnitario}">Precio Unitario</td>
+                            <input type="hidden" name="precioUnitario" th:value="${detalleVenta.producto.precioUnitario}" />
+                            <td>
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-save"></i> Guardar
+
+                                </button>
+                                <a th:href="@{/eliminarDetalle/{id}(id=${detalleVenta.idDetalle}, idVenta=${venta.idVenta})}" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i> Eliminar
+
+                                </a>
+                            </td>
+                        </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div th:fragment="agregarProducto" class="agregarProducto">
+            <div th:each="venta : ${ventas}">
+                <div class="container">
+                    <h5>Agregar producto</h5>
+                    <form th:action="@{detalleVenta/producto/guardar}" method="POST" class="was-validated" enctype="multipart/form-data">
+                        <input type="hidden" id="idVenta" name="idVenta" th:value="${venta.idVenta}"/>
+                        <div class="mb-3">
+                            <label for="idProducto">Nombre Producto</label>
+                            <select class="form-select" id="idProducto" name="idProducto" required="true">
+                                <option value="">Seleccionar producto</option>
+                                <option th:each="producto: ${productos}" th:value="${producto.idProducto}">
+                                <span th:text="${producto.nombre}"></span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cantidad">Cantidad</label>
+                            <option value="">Seleccionar cantidad</option>
+                            <select name="cantidad" id="cantidad">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-success" type="submit">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

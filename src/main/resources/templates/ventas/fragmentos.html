@@ -26,7 +26,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Cliente</th>
+                        <th scope="col">ID Cliente</th>
+                        <th scope="col">Nombre Cliente</th>
                         <th scope="col">Total Pagado</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Acciones</th>
@@ -35,13 +36,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <tbody>
 
                     <tr th:each="venta, iterStat : ${ventas}">
+                        <!--  <div th:with="cliente = ${venta.cliente}">-->
                         <th scope="row" th:text="${iterStat.count}">1</th>
-                        <td th:text="${venta.idCliente}">Cliente</td>
+                        <td th:text="${venta.cliente.idCliente}">ID Cliente</td>
+                        <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido1}">Nombre Cliente</td>
                         <td th:text="${venta.totalPagado}">Total Pagado</td>
                         <td th:text="${venta.fecha}">Fecha</td>
-                        <td><a class="btn btn-success" th:href="@{'/detalleVenta?id=' + ${venta.idVenta}}">Ver detalles</a></td>
+                        <td><a class="btn btn-primary" th:href="@{'/detalleVenta?id=' + ${venta.idVenta}}">Ver detalles</a></td>
+                        <!-- </div>-->
                     </tr>
-
                 </tbody>
             </table>
         </div>
