@@ -48,7 +48,7 @@ public class SucursalServiceImpl implements SucursalService {
     @Override
     public void crearSucursal(String nombre, String provincia, String canton, String direccion, String telefono,
             String sitioWeb) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_insertar_sucursal");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_insertar_datos.sp_insertar_sucursal");
         query.registerStoredProcedureParameter("v_nombre", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("v_provincia", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("v_canton", String.class, ParameterMode.IN);
@@ -69,7 +69,7 @@ public class SucursalServiceImpl implements SucursalService {
     @Override
     @Transactional
     public void actualizarSucursal(Sucursal sucursal) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_actualizar_sucursal");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_actualizar_datos.sp_actualizar_sucursal");
         query.registerStoredProcedureParameter("v_id_sucursal", Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("v_nombre", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("v_provincia", String.class, ParameterMode.IN);

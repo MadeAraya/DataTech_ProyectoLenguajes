@@ -1,194 +1,94 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <title>DataTech</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    </head>
 
-<head th:fragment="head">
-    <title>DataTech</title>
-    <meta charset="UTF-8" />
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <body>
+        <div th:fragment="aside" style="position: fixed; top: 0; left: 0; bottom: 0; background-color: #343a40; color: white; width: 470px;">
+            <style>
+                .navbar-brand img {
+                    max-height: 40px;
+                    margin-right: 10px;
+                }
 
+                .sidebar {
+                    background-color: #343a40;
+                    color: white;
+                    padding: 20px;
+              
+                }
 
+                .sidebar h2 {
+                    font-size: 24px;
+                    color: white;
+                }
 
-</head>
+                .nav-link {
+                    color: white !important;
+                }
 
-<body>
-    <div th:fragment="aside">
-        <style>
-            .navbar-brand img {
-                max-height: 40px;
-                margin-right: 10px;
-            }
-
-            .sidebar {
-                background-color: #343a40;
-                color: white;
-                padding: 20px;
-                height: calc(100vh - 56px);
-            }
-
-            .sidebar h2 {
-                font-size: 24px;
-                color: white;
-            }
-
-            .nav-link {
-                color: white !important;
-            }
         </style>
         <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" th:href="@{/}">
-                <img src="https://cdn-icons-png.flaticon.com/128/10229/10229090.png" alt="Logo DataTech" />
-                DataTech
-            </a>
-        </nav>
+                <a class="navbar-brand" th:href="@{/}">
+                    <img src="https://cdn-icons-png.flaticon.com/128/10229/10229090.png" alt="Logo DataTech" />
+                    DataTech
+                </a>
+            </nav>
 
-        <aside class="sidebar">
+            <aside class="sidebar">
             <h2>Menú</h2>
-            <ul class="nav flex-column">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/productos}">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/inventarios}">Inventarios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/proveedores}">Proveedores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/sucursales}">Sucursales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/categorias}">Categorías</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/clientes/listado}">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/empleados}">Empleados</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/ventas}">Ventas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/reportes}">Reportes</a>
-                </li>
-            </ul>
-        </aside>
-    </div>
-
-
-    <div th:fragment="contenidoIndex">
-        <div class="container-table"
-            style="background-image: url('https://www.elcorteingles.es/recursos/informacioncorporativa/img/portal/2017/07/05/samsung-store-el-corte-ingles-de-callao-mini-1180x535.jpg'); background-size: cover; background-position: center;">
-            <div class="title-and-button">
-                <h1>Bienvenid@ a <span style="background-color: black;">DataTech</span></h1>
-            </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/productos}">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/inventarios}">Inventarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/proveedores}">Proveedores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/sucursales}">Sucursales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/categorias}">Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/clientes/listado}">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/empleados}">Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/ventas}">Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/reportes}">Reportes</a>
+                    </li>
+                </ul>
+            </aside>
         </div>
-    </div>
 
-
-
-
-
-    <div th:fragment="contenidoClientes" class="clientes">
-        <div class="container mt-4">
-            <h2>Gestión de Clientes</h2>
-
-            <!-- Botón para abrir el formulario de agregar cliente -->
-            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#clienteModal">
-                Agregar Cliente
-            </button>
-
-            <!-- Modal para agregar cliente -->
-            <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="clienteModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="clienteModalLabel">Agregar Cliente</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Formulario para agregar cliente -->
-                            <form>
-                                <div class="form-group">
-                                    <label for="nombreCliente">Nombre</label>
-                                    <input type="text" class="form-control" id="nombreCliente"
-                                        placeholder="Ingrese el nombre del cliente">
-                                </div>
-                                <div class="form-group">
-                                    <label for="apellido1Cliente">Primer Apellido</label>
-                                    <input type="text" class="form-control" id="apellido1Cliente"
-                                        placeholder="Ingrese el primer apellido del cliente">
-                                </div>
-                                <div class="form-group">
-                                    <label for="apellido2Cliente">Segundo Apellido</label>
-                                    <input type="text" class="form-control" id="apellido2Cliente"
-                                        placeholder="Ingrese el segundo apellido del cliente">
-                                </div>
-                                <div class="form-group">
-                                    <label for="emailCliente">Email</label>
-                                    <input type="email" class="form-control" id="emailCliente"
-                                        placeholder="Ingrese el email del cliente">
-                                </div>
-                                <div class="form-group">
-                                    <label for="telefonoCliente">Teléfono</label>
-                                    <input type="text" class="form-control" id="telefonoCliente"
-                                        placeholder="Ingrese el teléfono del cliente">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Guardar Cliente</button>
-                        </div>
-                    </div>
+        <div th:fragment="contenidoIndex"  style="height: 100%; overflow: hidden;">
+            <div style="background-image: url('https://images.unsplash.com/photo-1594235048794-fae8583a5af5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 100%; width: 100%;">
+                <div class="carousel-caption d-none d-md-block position-absolute" style="top: 60%; left: 60%; transform: translate(-50%, -50%);">
+                    <h1 style="color: white; background-color: rgba(42, 42, 42, 0.6); width: 550px; padding: 20px; text-align: center; border-radius: 20px;">Bienvenid@ a DataTech</h1>
                 </div>
+
             </div>
-
-            <!-- Tabla de listado de clientes -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Primer Apellido</th>
-                        <th scope="col">Segundo Apellido</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="cliente : ${clientes}">
-                        <td th:text="${cliente.idCliente}">1</td>
-                        <td th:text="${cliente.nombre}">Nombre del Cliente</td>
-                        <td th:text="${cliente.apellido1}">Primer Apellido</td>
-                        <td th:text="${cliente.apellido2}">Segundo Apellido</td>
-                        <td th:text="${cliente.email}">Email del Cliente</td>
-                        <td th:text="${cliente.telefono}">Teléfono del Cliente</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                data-target="#clienteModal">Editar</button>
-                            <button class="btn btn-sm btn-danger"
-                                th:attr="data-id=${cliente.idCliente}">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-    </div>
-</body>
 
-
+    </body>
 </html>

@@ -51,7 +51,7 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Override
     @Transactional
     public void insertarProveedor(String nombre, String apellido, String email, String telefono) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_insertar_proveedor");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_insertar_datos.sp_insertar_proveedor");
         query.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
@@ -66,7 +66,7 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Override
     @Transactional
     public void actualizarProveedor(Long idProveedor, String nombre, String apellido, String telefono, String email) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_actualizar_proveedor");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_actualizar_datos.sp_actualizar_proveedor");
         query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);

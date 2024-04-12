@@ -57,7 +57,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void crearCliente(Cliente cliente) {
-        StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("sp_insertar_cliente");
+        StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("pkg_insertar_datos.sp_insertar_cliente");
 
         storedProcedure.registerStoredProcedureParameter("v_nombre", String.class, ParameterMode.IN);
         storedProcedure.registerStoredProcedureParameter("v_apellido1", String.class, ParameterMode.IN);
@@ -84,7 +84,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void actualizarCliente(Cliente cliente) {
-        StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("sp_actualizar_cliente");
+        StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("pkg_actualizar_datos.sp_actualizar_cliente");
 
         storedProcedure.registerStoredProcedureParameter("v_id_cliente", Long.class, ParameterMode.IN);
         storedProcedure.registerStoredProcedureParameter("v_nombre", String.class, ParameterMode.IN);

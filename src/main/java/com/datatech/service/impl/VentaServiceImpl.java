@@ -3,11 +3,11 @@ package com.datatech.service.impl;
 
 import com.datatech.dao.VentaDao;
 import com.datatech.domain.Cliente;
+import com.datatech.domain.Sucursal;
 import com.datatech.domain.Venta;
 import com.datatech.service.VentaService;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -51,8 +52,11 @@ public class VentaServiceImpl implements VentaService {
             long clienteId = ((BigDecimal) result[1]).longValue();
             Cliente cliente = entityManager.find(Cliente.class, clienteId);
             venta.setCliente(cliente);
-            venta.setTotalPagado(((BigDecimal) result[2]).doubleValue());
-            Timestamp timestamp = (Timestamp) result[3];
+            long sucursalId = ((BigDecimal) result[2]).longValue();
+            Sucursal sucursal = entityManager.find(Sucursal.class, sucursalId);
+            venta.setSucursal(sucursal);
+            venta.setTotalPagado(((BigDecimal) result[3]).doubleValue());
+            Timestamp timestamp = (Timestamp) result[4];
             LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
             venta.setFecha(Date.valueOf(localDate));
             ventas.add(venta);
@@ -77,36 +81,45 @@ public class VentaServiceImpl implements VentaService {
             long clienteId = ((BigDecimal) result[1]).longValue();
             Cliente cliente = entityManager.find(Cliente.class, clienteId);
             venta.setCliente(cliente);
-            venta.setTotalPagado(((BigDecimal) result[2]).doubleValue());
-            Timestamp timestamp = (Timestamp) result[3];
+            long sucursalId = ((BigDecimal) result[2]).longValue();
+            Sucursal sucursal = entityManager.find(Sucursal.class, sucursalId);
+            venta.setSucursal(sucursal);
+            venta.setTotalPagado(((BigDecimal) result[3]).doubleValue());
+            Timestamp timestamp = (Timestamp) result[4];
             LocalDate localDate = timestamp.toLocalDateTime().toLocalDate();
             venta.setFecha(Date.valueOf(localDate));
             ventas.add(venta);
         }
         return ventas;
     }
-    
+
     @Override
-    public void crearVenta(Venta venta) {
-        StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("sp_insertar_venta");
-
-        storedProcedure.registerStoredProcedureParameter("v_nombre", String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter("v_apellido1", String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter("v_apellido2", String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter("v_email", String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter("v_telefono", String.class, ParameterMode.IN);
-        storedProcedure.registerStoredProcedureParameter("v_fecha_registro", Date.class, ParameterMode.IN);
-
-        storedProcedure.execute();
+    @Transactional
+    public void insertarVenta(long idCliente, long idSucursal, double totalPagado, Date fecha) {
+        entityManager.createNativeQuery(
+                "CALL pkg_insertar_datos.sp_insertar_venta(:v_id_cliente, :v_id_sucursal, :v_total_pagado, :v_fecha)")
+                .setParameter("v_id_cliente", idCliente)
+                .setParameter("v_id_sucursal", idSucursal)
+                .setParameter("v_total_pagado", totalPagado)
+                .setParameter("v_fecha", fecha)
+                .executeUpdate();
     }
 
     @Override
-    public void eliminarVenta(int idVenta) {
+    public void eliminarVenta(long idVenta) {
         entityManager.createStoredProcedureQuery("eliminar_registro")
                 .registerStoredProcedureParameter(1, Long.class, ParameterMode.IN)
                 .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
                 .setParameter(1, idVenta)
                 .setParameter(2, "tab_venta")
+                .execute();
+    }
+    
+    @Override
+    public void actualizarTotal(long idVenta) {
+        entityManager.createStoredProcedureQuery("SP_ACTUALIZAR_TOTAL_VENTA")
+                .registerStoredProcedureParameter(1, Long.class, ParameterMode.IN)
+                .setParameter(1, idVenta)
                 .execute();
     }
 }

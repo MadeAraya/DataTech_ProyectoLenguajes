@@ -60,7 +60,7 @@ public class DetalleVentaServiceImpl implements DetalleVentaService {
 
     @Override
     public void insertarDetalleVenta(long idVenta, long idProducto, long cantidad, double precioUnitario) {
-        StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("sp_insertar_detalle_venta");
+        StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("pkg_insertar_datos.sp_insertar_detalle_venta");
 
         storedProcedure.registerStoredProcedureParameter("v_id_venta", Long.class, ParameterMode.IN);
         storedProcedure.registerStoredProcedureParameter("v_id_producto", Long.class, ParameterMode.IN);
@@ -86,7 +86,7 @@ public class DetalleVentaServiceImpl implements DetalleVentaService {
     }
     
     public void actualizarDetalleVenta(long idDetalle, long idVenta, long idProducto, long cantidad, double precioUnitario){
-       StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_actualizar_detalle_venta");
+       StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_actualizar_datos.sp_actualizar_detalle_venta");
         query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);

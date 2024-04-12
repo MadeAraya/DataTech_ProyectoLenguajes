@@ -85,12 +85,14 @@ public class DetalleVentaController {
         double precioUnitario = producto.getPrecioUnitario();
 
         detalleVentaService.insertarDetalleVenta(idVentaLong, idProductoLong, cantidad, precioUnitario);
+        ventaService.actualizarTotal(idVentaLong);
         return "redirect:/editarDetalleVenta?id=" + idVentaLong;
     }
 
     @GetMapping("/eliminarDetalle/{id}")
     public String eliminarDetalleVenta(@PathVariable("id") long idDetalle, @RequestParam("idVenta") long idVenta) {
         detalleVentaService.eliminarDetalleVenta(idDetalle);
+        ventaService.actualizarTotal(idVenta);
         return "redirect:/editarDetalleVenta?id=" + idVenta;
     }
 
@@ -107,6 +109,14 @@ public class DetalleVentaController {
         long idProductoLong = Long.parseLong(idProducto);
 
         detalleVentaService.actualizarDetalleVenta(idDetalleLong, idVentaLong, idProductoLong, cantidad, precioUnitario);
+        ventaService.actualizarTotal(idVentaLong);
         return "redirect:/editarDetalleVenta?id=" + idVentaLong;
     }
+    
+    @GetMapping("/eliminarVenta/{id}")
+    public String eliminarVenta(@PathVariable("id") long idVenta) {
+        ventaService.eliminarVenta(idVenta);
+        return "redirect:/ventas";
+    }
+    
 }

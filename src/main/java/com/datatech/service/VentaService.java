@@ -5,6 +5,7 @@
 package com.datatech.service;
 import com.datatech.domain.Venta;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ import java.util.List;
 public interface VentaService {
     List<Venta> obtenerVentas();
     public List<Venta> obtenerVentasPorId(BigDecimal idVenta);
-    void crearVenta(Venta venta);
-    void eliminarVenta(int idVenta);
+    void insertarVenta(long idCliente, long idSucursal, double totalPagado, Date fecha);
+    void eliminarVenta(long idVenta);
+    void actualizarTotal(long idVenta);
+    
 }

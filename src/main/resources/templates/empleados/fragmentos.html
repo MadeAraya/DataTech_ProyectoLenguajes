@@ -11,14 +11,8 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-
-
 </head>
-
 <body>
-
-
     <div th:fragment="contenidoEmpleados" class="empleados">
         <div class="container mt-4">
             <h2>Gestión de Empleados</h2>
@@ -115,9 +109,9 @@
                         <td th:text="${empleado.fechaContratacion}"></td>
                         <td>
                             <a class="btn btn-sm btn-primary"
-                                th:href="@{/empleados/editar/{id}(id=${empleado.idEmpleado})}">Editar</a>
+                                th:href="@{/empleados/editar/{id}(id=${empleado.idEmpleado})}"><i class="fas fa-edit"></i>Editar</a>
                             <a class="btn btn-sm btn-danger"
-                                th:href="@{/empleados/eliminar/{id}(id=${empleado.idEmpleado})}">Eliminar</a>
+                                th:href="@{/empleados/eliminar/{id}(id=${empleado.idEmpleado})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
                         </td>
                     </tr>
                 </tbody>

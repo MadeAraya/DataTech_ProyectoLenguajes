@@ -105,9 +105,9 @@
                         <td th:text="${inventario.cantDisponible}">10</td>
                         <td>
                             <a class="btn btn-sm btn-primary"
-                                th:href="@{/inventarios/editar/{id}(id=${inventario.idInventario})}">Editar</a>
+                                th:href="@{/inventarios/editar/{id}(id=${inventario.idInventario})}"><i class="fas fa-edit"></i>Editar</a>
                             <a class="btn btn-sm btn-danger"
-                                th:href="@{/inventarios/eliminar/{id}(id=${inventario.idInventario})}">Eliminar</a>
+                                th:href="@{/inventarios/eliminar/{id}(id=${inventario.idInventario})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
                         </td>
                     </tr>
                 </tbody>

@@ -24,13 +24,13 @@
             <h2>Gestión de Productos</h2>
 
             <!-- Botón para abrir el formulario de agregar producto -->
-            <button type="button" class="btn btn-sucess mb-3" data-toggle="modal" data-target="#agregarProductoModal">
+            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarProductoModal">
                 Agregar Producto
             </button>
 
             <!-- Modal para agregar producto -->
             <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
-                aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+                 aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -87,7 +87,6 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Precio</th>
-                        <th scope="col">Stock</th>
                         <th scope="col">Categoría</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -99,13 +98,12 @@
                         <td th:text="${producto.descripcion}">Descripción del Producto</td>
                         <td th:text="${#numbers.formatDecimal(producto.precioUnitario, 0, 'COMMA', 2, 'POINT')}">
                             ₡105620.00</td>
-                        <td th:text="${producto.getCantidadTotalStock()}">10</td>
                         <td th:text="${producto.categoria.nombre}">Categoría del Producto</td>
                         <td>
                             <a class="btn btn-sm btn-primary"
-                                th:href="@{/productos/editar/{id}(id=${producto.idProducto})}">Editar</a>
+                                th:href="@{/productos/editar/{id}(id=${producto.idProducto})}"><i class="fas fa-edit"></i>Editar</a>
                             <a class="btn btn-sm btn-danger"
-                                th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}">Eliminar</a>
+                                th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
 
                         </td>
                     </tr>

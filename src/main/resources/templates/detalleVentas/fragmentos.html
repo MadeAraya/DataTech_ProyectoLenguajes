@@ -22,13 +22,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div th:each="venta : ${ventas}" class="border border-secondary p-3 rounded w-75">
                 <div th:with="cliente = ${venta.cliente}">
                     <div class="d-flex flex-row mb-3 gap-4 w-100"> 
-                        <div class="p-1"><p>ID Venta: <span th:text="${venta.idVenta}"></span></p></div>
-                        <div class="p-1"><p>ID Cliente: <span th:text="${venta.cliente.idCliente}"></span></p></div>
-                        <div class="p-1"><p>Nombre: <span th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido1}"></span></p></div>
-                        <div class="p-1"><p>Total Pagado: <span th:text="${venta.totalPagado}"></span></p></div>
-                        <div class="p-1"><p>Fecha: <span th:text="${venta.fecha}"></span></p></div>
-                        <div class="p-1 btn btn-primary" style="margin-left: 100px;"> <a style="color:white;" th:href="@{'/editarDetalleVenta?id=' + ${venta.idVenta}}">Editar</a></div>
-                        <div class="p-1 btn btn-danger"><p>Eliminar</p></div>
+                        <div class="p-0"><p>ID Venta: <span th:text="${venta.idVenta}"></span></p></div>
+                        <div class="p-0"><p>ID Cliente: <span th:text="${venta.cliente.idCliente}"></span></p></div>
+                        <div class="p-0"><p>Nombre: <span th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido1}"></span></p></div>
+                        <div class="p-0"><p>Total Pagado: <span th:text="${venta.totalPagado}"></span></p></div>
+                        <div class="p-0"><p>Fecha: <span th:text="${venta.fecha}"></span></p></div>
+                        <div class="p-0 btn btn-primary" style="margin-left: 170px; width: 50px;"> <a style="color:white; text-decoration: none;" th:href="@{'/editarDetalleVenta?id=' + ${venta.idVenta}}">Editar</a></div>
+                        <div class="p-0 btn btn-dark" style="width: 50px;">
+                            <a href="#" style="color:white; text-decoration: none; font-style: normal;" onclick="window.history.back();">Volver</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3 w-100">   
@@ -66,7 +68,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <h2>Detalle de Venta</h2>
             <div th:each="venta : ${ventas}" class="border border-secondary p-3 rounded w-75">
                 <div th:with="cliente = ${venta.cliente}">
-                    <div class="d-flex flex-row mb-3 gap-4 w-100">
+                    <div class="d-flex flex-row mb-3 gap-3 w-100">
                         <div class="p-1">
                             <p>ID Venta: <span th:text="${venta.idVenta}"></span>
                             </p>
@@ -88,13 +90,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             </p>
                         </div>
                         <div class="p-1 btn btn-primary" style="margin-left: 100px;">
-                            <a style="color:white;" th:href="@{'/agregarProductoDV?id=' + ${venta.idVenta}}">Agregar producto</a>
+                            <a style="color:white; text-decoration: none;" th:href="@{'/agregarProductoDV?id=' + ${venta.idVenta}}">Agregar producto</a>
                         </div>
                         <div class="p-1 btn btn-success">
-                            <a style="color:white;" th:href=" @{'/detalleVenta?id=' + ${venta.idVenta}}">Terminé mis cambios</a>
+                            <a style="color:white; text-decoration: none;" th:href=" @{'/detalleVenta?id=' + ${venta.idVenta}}">Terminé mis cambios</a>
                         </div>
-                        <div class="p-1 btn btn-danger">
-                            <p>Eliminar</p>
+                        <div class="p-1 btn btn-danger"><a style="color:white; text-decoration: none;" th:href="@{'/eliminarVenta/'+${venta.idVenta}}">Eliminar</a>
                         </div>
                     </div>
                 </div>

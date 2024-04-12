@@ -50,7 +50,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional
     public void insertarProducto(Long idCategoria, String nombre, String descripcion, double precioUnitario) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_insertar_producto");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_insertar_datos.sp_insertar_producto");
         query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
@@ -66,7 +66,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public void actualizarProducto(Long idProducto, String nombre, String descripcion, double precioUnitario,
             Long idCategoria) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_actualizar_producto");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_actualizar_datos.sp_actualizar_producto");
         query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);

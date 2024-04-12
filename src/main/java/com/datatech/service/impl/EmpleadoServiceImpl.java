@@ -50,7 +50,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public void crearEmpleado(Long idSucursal, Long idCargo, java.util.Date fechaContratacion, String nombre,
             String apellido, String telefono, String email) {
         entityManager.createNativeQuery(
-                "CALL sp_insertar_empleado(:v_nombre, :v_apellido, :v_email, :v_telefono, :v_fecha_contratacion, :v_id_sucursal, :v_id_cargo)")
+                "CALL pkg_insertar_datos.sp_insertar_empleado(:v_nombre, :v_apellido, :v_email, :v_telefono, :v_fecha_contratacion, :v_id_sucursal, :v_id_cargo)")
                 .setParameter("v_nombre", nombre)
                 .setParameter("v_apellido", apellido)
                 .setParameter("v_email", email)
@@ -67,7 +67,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public void actualizarEmpleado(Long idEmpleado, Long idSucursal, Long idCargo, java.util.Date fechaContratacion,
             String nombre, String apellido, String telefono, String email) {
         entityManager.createNativeQuery(
-                "CALL sp_actualizar_empleado(:v_id_empleado, :v_nombre, :v_apellido, :v_email, :v_telefono, :v_fecha_contratacion, :v_id_sucursal, :v_id_cargo)")
+                "CALL pkg_actualizar_datos.sp_actualizar_empleado(:v_id_empleado, :v_nombre, :v_apellido, :v_email, :v_telefono, :v_fecha_contratacion, :v_id_sucursal, :v_id_cargo)")
                 .setParameter("v_id_empleado", idEmpleado)
                 .setParameter("v_nombre", nombre)
                 .setParameter("v_apellido", apellido)

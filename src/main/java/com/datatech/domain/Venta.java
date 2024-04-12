@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tab_venta")
@@ -24,12 +25,16 @@ public class Venta {
     //private BigDecimal  idCliente;
     private double  totalPagado;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_sucursal")
+    private Sucursal sucursal;
     
     public long getIdVenta() {
         return idVenta;
@@ -47,6 +52,14 @@ public class Venta {
         this.cliente = cliente;
     }
 
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
     public double getTotalPagado() {
         return totalPagado;
     }
@@ -62,6 +75,4 @@ public class Venta {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    
-    
 }

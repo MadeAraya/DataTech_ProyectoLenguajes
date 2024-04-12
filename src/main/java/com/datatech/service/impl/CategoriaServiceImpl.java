@@ -48,7 +48,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     @Transactional
     public void insertarCategoria(String nombre) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_insertar_categoria");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_insertar_datos.sp_insertar_categoria");
         query.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
         query.setParameter(1, nombre);
         query.execute();
@@ -59,7 +59,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     public void actualizarCategoria(Long idCategoria, String nombre) {
         // Print en consola de id y nombre
         System.out.println("idCategoria: " + idCategoria + " nombre: " + nombre);
-        entityManager.createNativeQuery("CALL sp_actualizar_categoria(:idCategoria, :nombre)")
+        entityManager.createNativeQuery("CALL pkg_actualizar_datos.sp_actualizar_categoria(:idCategoria, :nombre)")
                 .setParameter("idCategoria", idCategoria)
                 .setParameter("nombre", nombre)
                 .executeUpdate();

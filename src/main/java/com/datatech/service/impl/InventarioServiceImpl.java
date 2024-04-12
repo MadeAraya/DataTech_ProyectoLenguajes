@@ -64,7 +64,7 @@ public class InventarioServiceImpl implements InventarioService {
     @Override
     @Transactional
     public void insertarInventario(Long idSucursal, Long idProducto, Long idProveedor, Long cantDisponible) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_insertar_inventario");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_insertar_datos.sp_insertar_inventario");
         query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);
@@ -80,7 +80,7 @@ public class InventarioServiceImpl implements InventarioService {
     @Transactional
     public void actualizarInventario(Long idInventario, Long idSucursal, Long idProducto, Long idProveedor,
             Long cantDisponible) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_actualizar_inventario");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("pkg_actualizar_datos.sp_actualizar_inventario");
         query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);

@@ -10,45 +10,75 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    <div th:fragment="listaVentas" class="ventas">
-        <div class="container mt-4">
-            <h2>Ventas</h2>
-            <div class="col-md-3">   
-                <button 
-                    type="button" 
-                    class="btn btn-success btn-block" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#agregarVenta">
-                    <i class="fas fa-plus"></i>Agregar Venta
-                </button>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">ID Cliente</th>
-                        <th scope="col">Nombre Cliente</th>
-                        <th scope="col">Total Pagado</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div th:fragment="listaVentas" class="ventas">
+            <div class="container mt-4">
+                <h2>Ventas</h2>
+                <div class="col-md-3">   
+                    <a href="/ventas/agregar" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Agregar Venta
+                    </a>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID Venta</th>
+                            <th scope="col">ID Cliente</th>
+                            <th scope="col">Nombre Cliente</th>
+                            <th scope="col">Sucursal</th>
+                            <th scope="col">Total Pagado</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    <tr th:each="venta, iterStat : ${ventas}">
-                        <!--  <div th:with="cliente = ${venta.cliente}">-->
-                        <th scope="row" th:text="${iterStat.count}">1</th>
-                        <td th:text="${venta.cliente.idCliente}">ID Cliente</td>
-                        <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido1}">Nombre Cliente</td>
-                        <td th:text="${venta.totalPagado}">Total Pagado</td>
-                        <td th:text="${venta.fecha}">Fecha</td>
-                        <td><a class="btn btn-primary" th:href="@{'/detalleVenta?id=' + ${venta.idVenta}}">Ver detalles</a></td>
-                        <!-- </div>-->
-                    </tr>
-                </tbody>
-            </table>
+                        <tr th:each="venta, iterStat : ${ventas}">
+                            <!--  <div th:with="cliente = ${venta.cliente}">-->
+                            <td th:text="${venta.idVenta}">ID Venta</td>
+                            <td th:text="${venta.cliente.idCliente}">ID Cliente</td>
+                            <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido1}">Nombre Cliente</td>
+                            <td th:text="${venta.sucursal.nombre}">Sucursal</td>
+                            <td th:text="${venta.totalPagado}">Total Pagado</td>
+                            <td th:text="${venta.fecha}">Fecha</td>
+                            <td><a class="btn btn-primary" th:href="@{'/detalleVenta?id=' + ${venta.idVenta}}">Ver detalles</a></td>
+                            <!-- </div>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
-    </div>
-    </body>
+        <div th:fragment="formCrearVenta" class="agregarVenta">
+            <div class="container">
+                <h5>Agregar Venta</h5>
+                <form th:action="@{/venta/crear}" method="POST" th:object="${venta}" class="was-validated" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="idCliente">Cliente</label>
+                        <select class="form-select" id="idCliente" name="idCliente" required="true">
+                            <option value="">Seleccionar cliente</option>
+                            <option th:each="cliente: ${clientes}" th:value="${cliente.idCliente}">
+                            <span th:text="${cliente.nombre}+' '+${cliente.apellido1}"></span>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="idSucursal">Sucursal</label>
+                        <select class="form-select" id="idSucursal" name="idSucursal" required="true">
+                            <option value="">Seleccionar cliente</option>
+                            <option th:each="sucursal: ${sucursales}" th:value="${sucursal.idSucursal}">
+                            <span th:text="${sucursal.nombre}"></span>
+                            </option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="totalPagado" name="totalPagado" value="0"/>
+                    <div class="form-group">
+                        <label>Fecha:</label>
+                        <input type="date" class="form-control" name="fecha" th:value="${#dates.format(fecha, 'yyyy-MM-dd')}" required>
+                    </div>
+                    <button class="btn btn-success" type="submit">Agregar</button>
+                </form>
+                </div>
+        </div>
+</body>
 </html>
