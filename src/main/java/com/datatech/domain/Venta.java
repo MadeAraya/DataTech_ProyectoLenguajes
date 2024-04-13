@@ -35,6 +35,8 @@ public class Venta {
     @ManyToOne
     @JoinColumn(name = "id_sucursal")
     private Sucursal sucursal;
+
+    
     
     public long getIdVenta() {
         return idVenta;

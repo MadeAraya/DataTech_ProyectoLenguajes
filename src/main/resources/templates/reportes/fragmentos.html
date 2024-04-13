@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Listado de Clientes</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <div th:fragment="menuReportes">
+        <div class="container my-5">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="inventarios-tab" data-bs-toggle="tab" href="#inventarios" role="tab"
+                        aria-controls="inventarios" aria-selected="true">Inventarios por Sede</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ventas-tab" data-bs-toggle="tab" href="#ventas" role="tab"
+                        aria-controls="ventas" aria-selected="false">Reporte de Ventas</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="finanzas-tab" data-bs-toggle="tab" href="#finanzas" role="tab"
+                        aria-controls="finanzas" aria-selected="false">Resumen Financiero</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="inventarios" role="tabpanel"
+                    aria-labelledby="inventarios-tab">
+                    <!-- Contenido de la pestaña de Inventarios por Sede -->
+                    <div th:replace="~{reportes/fragmentos :: contenidoReporteInventario}" />
+                </div>
+                <div class="tab-pane fade" id="ventas" role="tabpanel" aria-labelledby="ventas-tab">
+                    <!-- Contenido de la pestaña Reporte de Ventas -->
+                    <div th:replace="~{reportes/fragmentos :: reporteVentasPorSucursal}" />
+                </div>
+                <div class="tab-pane fade" id="finanzas" role="tabpanel" aria-labelledby="finanzas-tab">
+                    <!-- Contenido de la pestaña reporte empleados por sucursal -->
+                    <div th:replace="~{reportes/fragmentos :: reporteEmpleadosPorSucursal}" />
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div th:fragment="contenidoReporteInventario">
+        <!-- Espacio para el gráfico -->
+        <div class="contenedorGraficos">
+            <canvas id="inventoryChart" width="200" height="200"></canvas>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sucursal</th>
+                    <th>Número de Items</th>
+                    <th>Total de productos en Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sucursal : ${sucursales}">
+                    <td th:text="${sucursal.nombre}"></td>
+                    <td th:text="${sucursal.inventarios.size()}"></td>
+                    <td th:text="${sucursal.getTotalUnidades()}"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            // Asumimos que Chart.js ya está cargado
+            document.addEventListener('DOMContentLoaded', function () {
+                // Crear arrays para las etiquetas y los datos
+                const nombresSucursales = /*[[${sucursales.![nombre]}]]*/['Sucursal A', 'Sucursal B'];
+                const totalesUnidades = /*[[${sucursales.![getTotalUnidades()]}]]*/[150, 200];
+
+                // Crea el gráfico
+                const ctx = document.getElementById('inventoryChart').getContext('2d');
+                const inventoryChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: nombresSucursales,
+                        datasets: [{
+                            label: 'Total de productos en Stock',
+                            data: totalesUnidades,
+                            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                            borderColor: 'rgba(0, 123, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+        <style>
+            .contenedorGraficos {
+                max-width: 600px;
+                /* Ajusta al tamaño deseado */
+                margin: auto;
+                /* Centra el gráfico horizontalmente */
+                padding: 20px;
+                background-color: #f9f9f9;
+                /* Color de fondo opcional */
+                border: 1px solid #ccc;
+                /* Borde opcional */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                /* Sombra opcional para darle un estilo elevado */
+            }
+
+            canvas {
+                width: 100% !important;
+                /* Asegura que el canvas tome todo el ancho del contenedor */
+                height: auto !important;
+                /* Altura automática para mantener la proporción */
+            }
+        </style>
+    </div>
+
+
+    <div th:fragment="reporteVentasPorSucursal">
+        <!-- Espacio para el gráfico -->
+        <div class="contenedorGraficos">
+            <canvas id="salesChart" width="200" height="200"></canvas>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sucursal</th>
+                    <th>Total de Ventas</th>
+                    <th>Total de Ingresos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sucursal : ${sucursales}">
+                    <td th:text="${sucursal.nombre}"></td>
+                    <td th:text="${sucursal.getCantidadVentas()}"></td>
+                    <td th:text="${sucursal.getTotalVentas()}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener('DOMContentLoaded', function () {
+                // Obteniendo solo los nombres de las sucursales y los totales de ventas
+                const nombresSucursales = /*[[${sucursales.![nombre]}]]*/['Sucursal A', 'Sucursal B'];
+                const totalVentas = /*[[${sucursales.![totalVentas]}]]*/[12000, 15000];
+
+
+                const ctx = document.getElementById('salesChart').getContext('2d');
+                const salesChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: nombresSucursales,
+                        datasets: [{
+                            label: 'Total de Ingresos en ₡',
+                            data: totalVentas,
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            });
+            /*]]>*/
+        </script>
+
+
+    </div>
+
+
+    <div th:fragment="reporteEmpleadosPorSucursal">
+        <h2>Total de Salarios por Sucursal</h2>
+        <div class="contenedorGraficos">
+            <canvas id="salariosChart"></canvas>
+        </div>
+
+
+
+        <h1 class="mb-4">Reporte de Empleados por Sucursal</h1>
+        <div th:each="entry : ${empleadosPorSucursal}" class="mb-5">
+            <h2 th:text="${entry.key.nombre}" class="mb-3">Nombre de la Sucursal</h2>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cargo</th>
+                        <th>Salario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="empleado : ${entry.value}">
+                        <td th:text="${empleado.nombre}">Nombre</td>
+                        <td th:text="${empleado.apellido}">Apellido</td>
+                        <td th:text="${empleado.cargo}">Cargo</td>
+                        <td th:text="${empleado.salario}">Salario</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var ctx = document.getElementById('salariosChart').getContext('2d');
+            var sucursales = /*[[${salarioPorSucursal.keySet()}]]*/[];
+            var salarios = /*[[${salarioPorSucursal.values()}]]*/[];
+
+            var salariosChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sucursales,
+                    datasets: [{
+                        label: 'Total Salarios',
+                        data: salarios,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            /*]]>*/
+        </script>
+    </div>
+
+
+
+</body>
+
+
+</html>
