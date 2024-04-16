@@ -1,139 +1,142 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{layout/plantilla :: head}">
-    <title>Listado de Clientes</title>
-    <meta charset="UTF-8" />
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-</head>
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Listado de Clientes</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    </head>
 
-<body>
+    <body>
 
 
-    <div th:fragment="contenidoProveedores" class="proveedores">
-        <div class="container mt-4">
-            <h2>Gestión de Proveedores</h2>
+        <div th:fragment="contenidoProveedores" class="proveedores">
+            <div class="container mt-4">
+                <h2>Gestión de Proveedores</h2>
 
-            <!-- Botón para abrir el formulario de agregar proveedor -->
-            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarProveedorModal">
-                Agregar Proveedor
-            </button>
+                <!-- Botón para abrir el formulario de agregar proveedor -->
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarProveedorModal">
+                    Agregar Proveedor
+                </button>
 
-            <!-- Modal para agregar proveedor -->
-            <div class="modal fade" id="agregarProveedorModal" tabindex="-1" role="dialog"
-                aria-labelledby="agregarProveedorModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="agregarProveedorModalLabel">Agregar Proveedor</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Formulario para agregar proveedor -->
-                            <form th:action="@{/proveedores/agregar}" th:object="${proveedor}" method="post">
-                                <div class="form-group">
-                                    <label for="nombreProveedor">Nombre</label>
-                                    <input type="text" class="form-control" th:field="*{nombre}"
-                                        placeholder="Ingrese el nombre del proveedor">
-                                </div>
-                                <div class="form-group">
-                                    <label for="apellidoProveedor">Apellido</label>
-                                    <input type="text" class="form-control" th:field="*{apellido}"
-                                        placeholder="Ingrese el apellido del proveedor">
-                                </div>
-                                <div class="form-group">
-                                    <label for="telefonoProveedor">Teléfono</label>
-                                    <input type="text" class="form-control" th:field="*{telefono}"
-                                        placeholder="Ingrese el teléfono del proveedor">
-                                </div>
-                                <div class="form-group">
-                                    <label for="emailProveedor">Email</label>
-                                    <input type="email" class="form-control" th:field="*{email}"
-                                        placeholder="Ingrese el email del proveedor">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Proveedor</button>
-                                </div>
-                            </form>
+                <!-- Modal para agregar proveedor -->
+                <div class="modal fade" id="agregarProveedorModal" tabindex="-1" role="dialog"
+                     aria-labelledby="agregarProveedorModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="agregarProveedorModalLabel">Agregar Proveedor</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario para agregar proveedor -->
+                                <form th:action="@{/proveedores/agregar}" th:object="${proveedor}" method="post">
+                                    <div class="form-group">
+                                        <label for="nombreProveedor">Nombre</label>
+                                        <input type="text" class="form-control" th:field="*{nombre}"
+                                               placeholder="Ingrese el nombre del proveedor" required pattern="^\S.+$">
+                                            <small class="form-text text-muted">El nombre no puede contener solo espacios en blanco.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apellidoProveedor">Apellido</label>
+                                        <input type="text" class="form-control" th:field="*{apellido}"
+                                               placeholder="Ingrese el apellido del proveedor" required pattern="^\S.+$">
+                                            <small class="form-text text-muted">El apellido no puede contener solo espacios en blanco.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefonoProveedor">Teléfono</label>
+                                        <input type="text" class="form-control" th:field="*{telefono}"
+                                               placeholder="Ingrese el teléfono del proveedor" required pattern="^[0-9]{8}$">
+                                            <small class="form-text text-muted">El teléfono debe contener 8 dígitos numéricos.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailProveedor">Email</label>
+                                        <input type="email" class="form-control" th:field="*{email}"
+                                               placeholder="Ingrese el email del proveedor" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                                            <small class="form-text text-muted">Ingrese una dirección de correo electrónico válida.</small>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Proveedor</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Tabla de listado de proveedores -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="proveedor : ${proveedores}">
+                            <th scope="row" th:text="${proveedor.idProveedor}">1</th>
+                            <td th:text="${proveedor.nombre}">Nombre del Proveedor</td>
+                            <td th:text="${proveedor.apellido}">Apellido del Proveedor</td>
+                            <td th:text="${proveedor.telefono}">Teléfono del Proveedor</td>
+                            <td th:text="${proveedor.email}">Email del Proveedor</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary"
+                                   th:href="@{/proveedores/editar/{id}(id=${proveedor.idProveedor})}"><i class="fas fa-edit"></i>Editar</a>
+
+                                <a class="btn btn-sm btn-danger"
+                                   th:href="@{/proveedores/eliminar/{id}(id=${proveedor.idProveedor})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-
-            <!-- Tabla de listado de proveedores -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="proveedor : ${proveedores}">
-                        <th scope="row" th:text="${proveedor.idProveedor}">1</th>
-                        <td th:text="${proveedor.nombre}">Nombre del Proveedor</td>
-                        <td th:text="${proveedor.apellido}">Apellido del Proveedor</td>
-                        <td th:text="${proveedor.telefono}">Teléfono del Proveedor</td>
-                        <td th:text="${proveedor.email}">Email del Proveedor</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary"
-                                th:href="@{/proveedores/editar/{id}(id=${proveedor.idProveedor})}"><i class="fas fa-edit"></i>Editar</a>
-
-                            <a class="btn btn-sm btn-danger"
-                                th:href="@{/proveedores/eliminar/{id}(id=${proveedor.idProveedor})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-        
-    </div>
 
 
-    <div th:fragment="contenidoEditarProveedor">
-        <form th:action="@{/proveedores/editar}" th:object="${proveedor}" method="post">
-            <input type="hidden" th:field="*{idProveedor}" />
-            <div class="form-group">
-                <label for="nombreProveedor">Nombre</label>
-                <input type="text" class="form-control" th:field="*{nombre}"
-                    placeholder="Ingrese el nombre del proveedor">
-            </div>
-            <div class="form-group">
-                <label for="apellidoProveedor">Apellido</label>
-                <input type="text" class="form-control" th:field="*{apellido}"
-                    placeholder="Ingrese el apellido del proveedor">
-            </div>
-            <div class="form-group">
-                <label for="telefonoProveedor">Teléfono</label>
-                <input type="text" class="form-control" th:field="*{telefono}"
-                    placeholder="Ingrese el teléfono del proveedor">
-            </div>
-            <div class="form-group">
-                <label for="emailProveedor">Email</label>
-                <input type="email" class="form-control" th:field="*{email}"
-                    placeholder="Ingrese el email del proveedor">
-            </div>
-            <button type="submit" class="btn btn-primary" >Guardar Cambios</button>
-        </form>
-    </div>
+        <div th:fragment="contenidoEditarProveedor">
+            <form th:action="@{/proveedores/editar}" th:object="${proveedor}" method="post">
+                <input type="hidden" th:field="*{idProveedor}" />
+                <div class="form-group">
+                    <label for="nombreProveedor">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}"
+                           placeholder="Ingrese el nombre del proveedor" required pattern="[^\s]+">
+                </div>
+                <div class="form-group">
+                    <label for="apellidoProveedor">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{apellido}"
+                           placeholder="Ingrese el apellido del proveedor" required pattern="[^\s]+">
+                </div>
+                <div class="form-group">
+                    <label for="telefonoProveedor">Teléfono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}"
+                           placeholder="Ingrese el teléfono del proveedor" required pattern="[0-9]{8}">
+                </div>
+                <div class="form-group">
+                    <label for="emailProveedor">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}"
+                           placeholder="Ingrese el email del proveedor" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">                 
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </form>
+        </div>
 
-</body>
+    </body>
 
 
 </html>

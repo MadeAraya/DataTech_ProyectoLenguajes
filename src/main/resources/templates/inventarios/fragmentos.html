@@ -1,164 +1,159 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{layout/plantilla :: head}">
-    <title>Listado de Clientes</title>
-    <meta charset="UTF-8" />
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Listado de Clientes</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
 
 
-</head>
+    </head>
 
-<body>
+    <body>
 
 
-    <div th:fragment="contenidoInventario" class="Inventarios">
-        <div class="container mt-4">
-            <h2>Gestión de Inventarios</h2>
+        <div th:fragment="contenidoInventario" class="Inventarios">
+            <div class="container mt-4">
+                <h2>Gestión de Inventarios</h2>
 
-            <!-- Botón para abrir el formulario de agregar inventario -->
-            <button type="button" class="btn btn-success mb-3" data-toggle="modal"
-                data-target="#agregarInventarioModal">
-                Agregar Inventario
-            </button>
+                <!-- Botón para abrir el formulario de agregar inventario -->
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal"
+                        data-target="#agregarInventarioModal">
+                    Agregar Inventario
+                </button>
 
-            <!-- Modal para agregar inventario -->
-            <div class="modal fade" id="agregarInventarioModal" tabindex="-1" role="dialog"
-                aria-labelledby="agregarInventarioModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="agregarInventarioModalLabel">Agregar Inventario</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Formulario para agregar inventario -->
-                            <form th:action="@{/inventarios/agregar}" th:object="${inventario}" method="post">
-                                
-                                <div class="form-group">
-                                    <label for="sucursalInventario">Sucursal</label>
-                                    <select class="form-control" th:field="*{sucursal.idSucursal}">
-                                        <option value="" selected>Seleccione una sucursal</option>
-                                        <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}"
-                                            th:text="${sucursal.nombre}"></option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="productoInventario">Producto</label>
-                                    <select class="form-control" th:field="*{producto.idProducto}">
-                                        <option value="" selected>Seleccione un producto</option>
-                                        <option th:each="producto : ${productos}" th:value="${producto.idProducto}"
-                                            th:text="${producto.nombre}"></option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="proveedorInventario">Proveedor</label>
-                                    <select class="form-control" th:field="*{proveedor.idProveedor}">
-                                        <option value="" selected>Seleccione un proveedor</option>
-                                        <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}"
-                                            th:text="${proveedor.nombre}"></option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cantidadDisponibleInventario">Cantidad Disponible</label>
-                                    <input type="number" class="form-control" th:field="*{cantDisponible}"
-                                        placeholder="Ingrese la cantidad disponible del producto">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Inventario</button>
-                                </div>
-                            </form>
+                <!-- Modal para agregar inventario -->
+                <div class="modal fade" id="agregarInventarioModal" tabindex="-1" role="dialog"
+                     aria-labelledby="agregarInventarioModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="agregarInventarioModalLabel">Agregar Inventario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario para agregar inventario -->
+                                <form th:action="@{/inventarios/agregar}" th:object="${inventario}" method="post">
+                                    <div class="form-group">
+                                        <label for="sucursalInventario">Sucursal</label>
+                                        <select class="form-control" th:field="*{sucursal.idSucursal}">
+                                            <option value="" selected>Seleccione una sucursal</option>
+                                            <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}" th:text="${sucursal.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productoInventario">Producto</label>
+                                        <select class="form-control" th:field="*{producto.idProducto}">
+                                            <option value="" selected>Seleccione un producto</option>
+                                            <option th:each="producto : ${productos}" th:value="${producto.idProducto}" th:text="${producto.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="proveedorInventario">Proveedor</label>
+                                        <select class="form-control" th:field="*{proveedor.idProveedor}">
+                                            <option value="" selected>Seleccione un proveedor</option>
+                                            <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}" th:text="${proveedor.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cantidadDisponibleInventario">Cantidad Disponible</label>
+                                        <input type="number" class="form-control" th:field="*{cantDisponible}"
+                                               placeholder="Ingrese la cantidad disponible del producto" min="0" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Inventario</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tabla de listado de inventarios -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Sucursal</th>
-                        <th scope="col">Proveedor</th>
-                        <th scope="col">Cantidad Disponible</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="inventario : ${inventarios}">
-                        <td th:text="${inventario.idInventario}">1</td>
-                        <td th:text="${inventario.producto.nombre}">Nombre del Producto</td>
-                        <td th:text="${inventario.sucursal.nombre}">Nombre de la Sucursal</td>
-                        <td th:text="${inventario.proveedor.nombre}">Nombre del Proveedor</td>
-                        <td th:text="${inventario.cantDisponible}">10</td>
-                        <td>
-                            <a class="btn btn-sm btn-primary"
-                                th:href="@{/inventarios/editar/{id}(id=${inventario.idInventario})}"><i class="fas fa-edit"></i>Editar</a>
-                            <a class="btn btn-sm btn-danger"
-                                th:href="@{/inventarios/eliminar/{id}(id=${inventario.idInventario})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                <!-- Tabla de listado de inventarios -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Sucursal</th>
+                            <th scope="col">Proveedor</th>
+                            <th scope="col">Cantidad Disponible</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="inventario : ${inventarios}">
+                            <td th:text="${inventario.idInventario}">1</td>
+                            <td th:text="${inventario.producto.nombre}">Nombre del Producto</td>
+                            <td th:text="${inventario.sucursal.nombre}">Nombre de la Sucursal</td>
+                            <td th:text="${inventario.proveedor.nombre}">Nombre del Proveedor</td>
+                            <td th:text="${inventario.cantDisponible}">10</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary"
+                                   th:href="@{/inventarios/editar/{id}(id=${inventario.idInventario})}"><i class="fas fa-edit"></i>Editar</a>
+                                <a class="btn btn-sm btn-danger"
+                                   th:href="@{/inventarios/eliminar/{id}(id=${inventario.idInventario})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <div th:fragment="contenidoEditarInventario">
-        <form th:action="@{/inventarios/editar}" th:object="${inventario}" method="post">
-            <input type="hidden" th:field="*{idInventario}" />
-            <div class="form-group">
-                <label for="productoInventario">Producto</label>
-                <select class="form-control" th:field="*{producto.idProducto}">
-                    <option value="" th:unless="${productos}" th:text="Seleccione un producto"></option>
-                    <option th:each="producto : ${productos}" th:value="${producto.idProducto}"
-                        th:text="${producto.nombre}"
-                        th:selected="${producto.idProducto == inventario.producto.idProducto}"></option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="sucursalInventario">Sucursal</label>
-                <select class="form-control" th:field="*{sucursal.idSucursal}">
-                    <option value="" th:unless="${sucursales}" th:text="Seleccione una sucursal"></option>
-                    <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}"
-                        th:text="${sucursal.nombre}"
-                        th:selected="${sucursal.idSucursal == inventario.sucursal.idSucursal}"></option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="proveedorInventario">Proveedor</label>
-                <select class="form-control" th:field="*{proveedor.idProveedor}">
-                    <option value="" th:unless="${proveedores}" th:text="Seleccione un proveedor"></option>
-                    <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}"
-                        th:text="${proveedor.nombre}"
-                        th:selected="${proveedor.idProveedor == inventario.proveedor.idProveedor}"></option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="cantidadDisponibleInventario">Cantidad Disponible</label>
-                <input type="number" class="form-control" th:field="*{cantDisponible}"
-                    placeholder="Ingrese la cantidad disponible del producto">
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        </form>
-    </div>
-
+        <div th:fragment="contenidoEditarInventario">
+            <form th:action="@{/inventarios/editar}" th:object="${inventario}" method="post">
+                <input type="hidden" th:field="*{idInventario}" />
+                <div class="form-group">
+                    <label for="productoInventario">Producto</label>
+                    <select class="form-control" th:field="*{producto.idProducto}">
+                        <option value="" th:unless="${productos}" th:text="Seleccione un producto"></option>
+                        <option th:each="producto : ${productos}" th:value="${producto.idProducto}"
+                                th:text="${producto.nombre}"
+                                th:selected="${producto.idProducto == inventario.producto.idProducto}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sucursalInventario">Sucursal</label>
+                    <select class="form-control" th:field="*{sucursal.idSucursal}">
+                        <option value="" th:unless="${sucursales}" th:text="Seleccione una sucursal"></option>
+                        <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}"
+                                th:text="${sucursal.nombre}"
+                                th:selected="${sucursal.idSucursal == inventario.sucursal.idSucursal}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="proveedorInventario">Proveedor</label>
+                    <select class="form-control" th:field="*{proveedor.idProveedor}">
+                        <option value="" th:unless="${proveedores}" th:text="Seleccione un proveedor"></option>
+                        <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}"
+                                th:text="${proveedor.nombre}"
+                                th:selected="${proveedor.idProveedor == inventario.proveedor.idProveedor}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cantidadDisponibleInventario">Cantidad Disponible</label>
+                    <input type="number" class="form-control" th:field="*{cantDisponible}"
+                           placeholder="Ingrese la cantidad disponible del producto" min="0">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </form>
+        </div>
 
 
 
 
-</body>
+
+    </body>
 
 
 </html>

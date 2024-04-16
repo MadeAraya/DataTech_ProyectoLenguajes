@@ -1,179 +1,180 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{layout/plantilla :: head}">
-    <title>Listado de Clientes</title>
-    <meta charset="UTF-8" />
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-</head>
-<body>
-    <div th:fragment="contenidoEmpleados" class="empleados">
-        <div class="container mt-4">
-            <h2>Gestión de Empleados</h2>
-            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarEmpleadoModal">
-                Agregar Empleado
-            </button>
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Listado de Clientes</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    </head>
+    <body>
+        <div th:fragment="contenidoEmpleados" class="empleados">
+            <div class="container mt-4">
+                <h2>Gestión de Empleados</h2>
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarEmpleadoModal">
+                    Agregar Empleado
+                </button>
 
-            <!-- Modal para agregar empleado -->
-            <div class="modal fade" id="agregarEmpleadoModal" tabindex="-1" role="dialog"
-                aria-labelledby="agregarEmpleadoModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="agregarEmpleadoModalLabel">Agregar Empleado</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Formulario para agregar empleado -->
-                            <form th:action="@{/empleados/agregar}" th:object="${empleado}" method="post">
-                                <div class="form-group">
-                                    <label for="nombreEmpleado">Nombre</label>
-                                    <input type="text" class="form-control" th:field="*{nombre}"
-                                        placeholder="Ingrese el nombre del empleado">
-                                </div>
-                                <div class="form-group">
-                                    <label for="apellidoEmpleado">Apellido</label>
-                                    <input type="text" class="form-control" th:field="*{apellido}"
-                                        placeholder="Ingrese el apellido del empleado">
-                                </div>
-                                <div class="form-group">
-                                    <label for="telefonoEmpleado">Teléfono</label>
-                                    <input type="text" class="form-control" th:field="*{telefono}"
-                                        placeholder="Ingrese el teléfono del empleado">
-                                </div>
-                                <div class="form-group">
-                                    <label for="emailEmpleado">Email</label>
-                                    <input type="email" class="form-control" th:field="*{email}"
-                                        placeholder="Ingrese el email del empleado">
-                                </div>
-                                <div class="form-group">
-                                    <label for="sucursalEmpleado">Sucursal</label>
-                                    <select class="form-control" th:field="*{sucursal.idSucursal}">
-                                        <option value="" selected>Seleccione una sucursal</option>
-                                        <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}"
-                                            th:text="${sucursal.nombre}"></option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cargoEmpleado">Cargo</label>
-                                    <select class="form-control" th:field="*{cargo.idCargo}">
-                                        <option value="" selected>Seleccione un cargo</option>
-                                        <option th:each="cargo : ${cargos}" th:value="${cargo.idCargo}"
-                                            th:text="${cargo.nombreCargo}"></option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="fechaContratacionEmpleado">Fecha de Contratación</label>
-                                    <input type="date" class="form-control" th:field="*{fechaContratacion}"
-                                        placeholder="Ingrese la fecha de contratación del empleado">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </form>
+                <!-- Modal para agregar empleado -->
+                <div class="modal fade" id="agregarEmpleadoModal" tabindex="-1" role="dialog"
+                     aria-labelledby="agregarEmpleadoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="agregarEmpleadoModalLabel">Agregar Empleado</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario para agregar empleado -->
+                                <form th:action="@{/empleados/agregar}" th:object="${empleado}" method="post">
+                                    <div class="form-group">
+                                        <label for="nombreEmpleado">Nombre</label>
+                                        <input type="text" class="form-control" th:field="*{nombre}"
+                                               placeholder="Ingrese el nombre del empleado" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apellidoEmpleado">Apellido</label>
+                                        <input type="text" class="form-control" th:field="*{apellido}"
+                                               placeholder="Ingrese el apellido del empleado" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefonoEmpleado">Teléfono</label>
+                                        <input type="text" class="form-control" th:field="*{telefono}"
+                                               placeholder="Ingrese el teléfono del empleado" pattern="[0-9]{8}" title="El teléfono debe tener 8 dígitos" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailEmpleado">Email</label>
+                                        <input type="email" class="form-control" th:field="*{email}"
+                                               placeholder="Ingrese el email del empleado" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sucursalEmpleado">Sucursal</label>
+                                        <select class="form-control" th:field="*{sucursal.idSucursal}" required>
+                                            <option value="" selected>Seleccione una sucursal</option>
+                                            <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}"
+                                                    th:text="${sucursal.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cargoEmpleado">Cargo</label>
+                                        <select class="form-control" th:field="*{cargo.idCargo}" required>
+                                            <option value="" selected>Seleccione un cargo</option>
+                                            <option th:each="cargo : ${cargos}" th:value="${cargo.idCargo}"
+                                                    th:text="${cargo.nombreCargo}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fechaContratacionEmpleado">Fecha de Contratación</label>
+                                        <input type="date" class="form-control" th:field="*{fechaContratacion}"
+                                               placeholder="Ingrese la fecha de contratación del empleado" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Tabla de listado de empleados -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Sucursal</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Fecha de Contratación</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="empleado : ${empleados}">
+                            <th scope="row" th:text="${empleado.idEmpleado}"></th>
+                            <td th:text="${empleado.nombre}"></td>
+                            <td th:text="${empleado.apellido}"></td>
+                            <td th:text="${empleado.telefono}"></td>
+                            <td th:text="${empleado.email}"></td>
+                            <td th:text="${empleado.sucursal.nombre}"></td>
+                            <td th:text="${empleado.cargo.nombreCargo}"></td>
+                            <td th:text="${empleado.fechaContratacion}"></td>
+                            <td>
+                                <a class="btn btn-sm btn-primary"
+                                   th:href="@{/empleados/editar/{id}(id=${empleado.idEmpleado})}"><i class="fas fa-edit"></i>Editar</a>
+                                <a class="btn btn-sm btn-danger"
+                                   th:href="@{/empleados/eliminar/{id}(id=${empleado.idEmpleado})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <!-- Tabla de listado de empleados -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Sucursal</th>
-                        <th scope="col">Cargo</th>
-                        <th scope="col">Fecha de Contratación</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="empleado : ${empleados}">
-                        <th scope="row" th:text="${empleado.idEmpleado}"></th>
-                        <td th:text="${empleado.nombre}"></td>
-                        <td th:text="${empleado.apellido}"></td>
-                        <td th:text="${empleado.telefono}"></td>
-                        <td th:text="${empleado.email}"></td>
-                        <td th:text="${empleado.sucursal.nombre}"></td>
-                        <td th:text="${empleado.cargo.nombreCargo}"></td>
-                        <td th:text="${empleado.fechaContratacion}"></td>
-                        <td>
-                            <a class="btn btn-sm btn-primary"
-                                th:href="@{/empleados/editar/{id}(id=${empleado.idEmpleado})}"><i class="fas fa-edit"></i>Editar</a>
-                            <a class="btn btn-sm btn-danger"
-                                th:href="@{/empleados/eliminar/{id}(id=${empleado.idEmpleado})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-    </div>
 
 
-    <div th:fragment="contenidoEditarEmpleado">
-        <div class="container mt-4">
-            <h2>Editar Empleado</h2>
-            <form th:action="@{/empleados/editar}" th:object="${empleado}" method="post">
-                <input type="hidden" th:field="*{idEmpleado}" />
-                <div class="form-group">
-                    <label for="nombreEmpleado">Nombre</label>
-                    <input type="text" class="form-control" th:field="*{nombre}"
-                        placeholder="Ingrese el nombre del empleado">
-                </div>
-                <div class="form-group">
-                    <label for="apellidoEmpleado">Apellido</label>
-                    <input type="text" class="form-control" th:field="*{apellido}"
-                        placeholder="Ingrese el apellido del empleado">
-                </div>
-                <div class="form-group">
-                    <label for="telefonoEmpleado">Teléfono</label>
-                    <input type="text" class="form-control" th:field="*{telefono}"
-                        placeholder="Ingrese el teléfono del empleado">
-                </div>
-                <div class="form-group">
-                    <label for="emailEmpleado">Email</label>
-                    <input type="email" class="form-control" th:field="*{email}"
-                        placeholder="Ingrese el email del empleado">
-                </div>
-                <div class="form-group">
-                    <label for="sucursalEmpleado">Sucursal</label>
-                    <select class="form-control" th:field="*{sucursal.idSucursal}">
-                        <option value="" selected>Seleccione una sucursal</option>
-                        <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}"
-                            th:text="${sucursal.nombre}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="cargoEmpleado">Cargo</label>
-                    <select class="form-control" th:field="*{cargo.idCargo}">
-                        <option value="" selected>Seleccione un cargo</option>
-                        <option th:each="cargo : ${cargos}" th:value="${cargo.idCargo}" th:text="${cargo.nombreCargo}">
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fechaContratacionEmpleado">Fecha de Contratación</label>
-                    <input type="date" class="form-control" th:field="*{fechaContratacion}"
-                        placeholder="Ingrese la fecha de contratación del empleado">
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            </form>
+        <div th:fragment="contenidoEditarEmpleado">
+            <div class="container mt-4">
+                <h2>Editar Empleado</h2>
+                <form th:action="@{/empleados/editar}" th:object="${empleado}" method="post">
+                    <input type="hidden" th:field="*{idEmpleado}" />
+                    <div class="form-group">
+                        <label for="nombreEmpleado">Nombre</label>
+                        <input type="text" class="form-control" th:field="*{nombre}"
+                               placeholder="Ingrese el nombre del empleado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidoEmpleado">Apellido</label>
+                        <input type="text" class="form-control" th:field="*{apellido}"
+                               placeholder="Ingrese el apellido del empleado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefonoEmpleado">Teléfono</label>
+                        <input type="text" class="form-control" th:field="*{telefono}"
+                               placeholder="Ingrese el teléfono del empleado" required pattern="[0-9]{8}">
+                            <small class="text-muted">Debe tener 8 dígitos.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailEmpleado">Email</label>
+                        <input type="email" class="form-control" th:field="*{email}"
+                               placeholder="Ingrese el email del empleado" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                    </div>
+                    <div class="form-group">
+                        <label for="sucursalEmpleado">Sucursal</label>
+                        <select class="form-control" th:field="*{sucursal.idSucursal}" required>
+                            <option value="" selected>Seleccione una sucursal</option>
+                            <option th:each="sucursal : ${sucursales}" th:value="${sucursal.idSucursal}"
+                                    th:text="${sucursal.nombre}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cargoEmpleado">Cargo</label>
+                        <select class="form-control" th:field="*{cargo.idCargo}" required>
+                            <option value="" selected>Seleccione un cargo</option>
+                            <option th:each="cargo : ${cargos}" th:value="${cargo.idCargo}" th:text="${cargo.nombreCargo}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaContratacionEmpleado">Fecha de Contratación</label>
+                        <input type="date" class="form-control" th:field="*{fechaContratacion}"
+                               placeholder="Ingrese la fecha de contratación del empleado" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+            </div>
         </div>
-    </div>
 
 
 
-</body>
+    </body>
 
 
 </html>

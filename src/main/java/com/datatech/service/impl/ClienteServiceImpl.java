@@ -72,7 +72,7 @@ public class ClienteServiceImpl implements ClienteService {
         storedProcedure.setParameter("v_email", cliente.getEmail());
         storedProcedure.setParameter("v_telefono", cliente.getTelefono());
         java.sql.Date fechaSql = new java.sql.Date(cliente.getFechaRegistro().getTime());
-        storedProcedure.setParameter("v_fecha_registro", fechaSql);
+        storedProcedure.setParameter("v_fecha_registro", new Date(cliente.getFechaRegistro().getTime()));
 
         storedProcedure.execute();
     }
