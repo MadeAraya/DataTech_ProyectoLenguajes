@@ -33,7 +33,7 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Formulario para agregar empleado -->
-                                <form th:action="@{/comentarios/agregar}" th:object="${comentario}" method="post">
+                                <form th:action="@{/comentarios/agregar}" th:object="${comentarioObj}" method="post">
                                     <div class="form-group">
                                         <label for="clienteComentario">Cliente</label>
                                         <input type="text" class="form-control" th:field="*{idCliente.idCliente}"
@@ -81,18 +81,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="comentario : ${comentarios}">
-                            <th scope="row" th:text="${comentario.idComentario}"></th>
-                            <td th:text="${comentario.idProducto.nombre}"></td>
-                            <td th:text="${comentario.idCliente.nombre}"></td>
-                            <td th:text="${comentario.fecha}"></td>
-                            <td th:text="${comentario.calificacion}"></td>
-                            <td th:text="${comentario.comentario}"></td>
+                        <tr th:each="comentarioObj : ${comentarioObjs}">
+                            <th scope="row" th:text="${comentarioObj.idComentario}"></th>
+                            <td th:text="${comentarioObj.idProducto.nombre}"></td>
+                            <td th:text="${comentarioObj.idCliente.nombre}"></td>
+                            <td th:text="${comentarioObj.fecha}"></td>
+                            <td th:text="${comentarioObj.calificacion}"></td>
+                            <td th:text="${comentarioObj.comentario}"></td>
                             <td>
                                 <a class="btn btn-sm btn-primary"
-                                   th:href="@{/comentarios/editar/{id}(id=${comentario.idComentario})}"><i class="fas fa-edit"></i>Editar</a>
+                                   th:href="@{/comentarios/editar/{id}(id=${comentarioObj.idComentario})}"><i class="fas fa-edit"></i>Editar</a>
                                 <a class="btn btn-sm btn-danger"
-                                   th:href="@{/comentarios/eliminar/{id}(id=${comentario.idComentario})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
+                                   th:href="@{/comentarios/eliminar/{id}(id=${comentarioObj.idComentario})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
                             </td>
                         </tr>
                     </tbody>
@@ -106,7 +106,7 @@
         <div th:fragment="contenidoEditarComentario">
             <div class="container mt-4">
                 <h2>Editar Comentario</h2>
-                <form th:action="@{/comentarios/editar}" th:object="${comentario}" method="post">
+                <form th:action="@{/comentarios/editar}" th:object="${comentarioObj}" method="post">
                     <input type="hidden" th:field="*{idComentario}" />
                     <div class="form-group">
                         <label for="clienteComentario">Cliente</label>

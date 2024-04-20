@@ -7,9 +7,9 @@ package com.datatech.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-import com.datatech.domain.Comentario;
+import com.datatech.domain.ComentarioObj;
 
-public interface ComentarioDao extends JpaRepository<Comentario,Long> {
+public interface ComentarioObjDao extends JpaRepository<ComentarioObj,Long> {
     
 }
 

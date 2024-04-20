@@ -4,26 +4,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.datatech.service.ComentarioService;
-import com.datatech.dao.ComentarioDao;
-import com.datatech.domain.Comentario;
-import java.sql.Date;
+import com.datatech.service.ComentarioObjService;
+import com.datatech.dao.ComentarioObjDao;
+import com.datatech.domain.ComentarioObj;
 
 import javax.persistence.*;
 
 @Service
-public class ComentarioServiceImpl implements ComentarioService {
+public class ComentarioObjServiceImpl implements ComentarioObjService {
 
     @Autowired
-    private ComentarioDao ComentarioDao;
+    private ComentarioObjDao ComentarioDao;
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     @Transactional(readOnly = true)
-    public List<Comentario> getComentarios() {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos", Comentario.class);
+    public List<ComentarioObj> getComentarios() {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos", ComentarioObj.class);
         query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
         query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
         query.setParameter(2, "tab_comentario");
@@ -33,15 +32,15 @@ public class ComentarioServiceImpl implements ComentarioService {
 
     @Override
     @Transactional(readOnly = true)
-    public Comentario getComentarioPorId(Long idComentario) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos_porID", Comentario.class);
+    public ComentarioObj getComentarioPorId(Long idComentario) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("sp_obtener_datos_porID", ComentarioObj.class);
         query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
         query.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);
         query.setParameter(2, "tab_comentario");
         query.setParameter(3, idComentario);
         query.execute();
-        List<Comentario> result = query.getResultList();
+        List<ComentarioObj> result = query.getResultList();
         return result.isEmpty() ? null : result.get(0);
     }
 

@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "tab_comentario")
-public class Comentario implements Serializable {
+public class ComentarioObj implements Serializable {
 
     private static final long serialVersionUID = 1L; 
 
@@ -33,9 +33,9 @@ public class Comentario implements Serializable {
     
     private Long calificacion;
     private String comentario;
+    
      
     
-
 }
 /*
 *CREATE TABLE tab_comentario(

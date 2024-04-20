@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.datatech.domain.Comentario;
-import com.datatech.service.ComentarioService;
+import com.datatech.domain.ComentarioObj;
+import com.datatech.service.ComentarioObjService;
 import com.datatech.service.ProductoService;
 import com.datatech.service.ClienteService;
 
@@ -22,7 +21,7 @@ import com.datatech.service.ClienteService;
 @RequestMapping("/comentarios")
 public class ComentarioController {
     @Autowired
-    private ComentarioService comentarioService;
+    private ComentarioObjService comentarioService;
     
     @Autowired
     private ProductoService productoService;
@@ -35,15 +34,15 @@ public class ComentarioController {
         var lista = comentarioService.getComentarios();
         var listaProductos = productoService.getProductos();
         var listaClientes = clienteService.obtenerClientes();
-        model.addAttribute("comentarios",lista);
+        model.addAttribute("comentarioObjs",lista);
         model.addAttribute("productos",listaProductos);
         model.addAttribute("clientes",listaClientes);
-        model.addAttribute("comentario",new Comentario());
+        model.addAttribute("comentarioObj",new ComentarioObj());
         return "comentarios/listado";
     }
     
     @PostMapping("/agregar")
-    public String agregarComentario(@ModelAttribute Comentario comentario) {
+    public String agregarComentario(@ModelAttribute ComentarioObj comentario) {
         comentarioService.crearComentario(comentario.getIdCliente().getIdCliente(), comentario.getIdProducto().getIdProducto(),
                 comentario.getCalificacion(), comentario.getComentario(),comentario.getFecha());
         return "redirect:/comentarios";
@@ -51,17 +50,17 @@ public class ComentarioController {
 
     @GetMapping("/editar/{id}")
     public String editarComentario(@PathVariable("id") Long idComentario, Model model) {
-        var comentario = comentarioService.getComentarioPorId(idComentario);
+        var comentarioObj = comentarioService.getComentarioPorId(idComentario);
         var listaProductos = productoService.getProductos();
         var listaClientes = clienteService.obtenerClientes();
-        model.addAttribute("comentario", comentario);
+        model.addAttribute("comentarioObj", comentarioObj);
         model.addAttribute("productos", listaProductos);
         model.addAttribute("clientes", listaClientes);
         return "comentarios/editar";
     }
     
     @PostMapping("/editar")
-    public String actualizarComentario(@ModelAttribute Comentario comentario) {
+    public String actualizarComentario(@ModelAttribute ComentarioObj comentario) {
         comentarioService.actualizarComentario(comentario.getIdComentario(), comentario.getIdCliente().getIdCliente(), comentario.getIdProducto().getIdProducto(), 
                 comentario.getCalificacion(), comentario.getComentario(),comentario.getFecha());
         return "redirect:/comentarios";
