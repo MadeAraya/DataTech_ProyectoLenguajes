@@ -29,7 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <div class="p-0"><p>Fecha: <span th:text="${venta.fecha}"></span></p></div>
                         <div class="p-0 btn btn-primary" style="margin-left: 170px; width: 50px;"> <a style="color:white; text-decoration: none;" th:href="@{'/editarDetalleVenta?id=' + ${venta.idVenta}}">Editar</a></div>
                         <div class="p-0 btn btn-dark" style="width: 50px;">
-                            <a href="#" style="color:white; text-decoration: none; font-style: normal;" onclick="window.history.back();">Volver</a>
+                            <a th:href="@{/ventas}" style="color:white; text-decoration: none; font-style: normal;">Volver</a>
                         </div>
                     </div>
                 </div>
