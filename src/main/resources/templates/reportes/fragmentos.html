@@ -24,7 +24,7 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="inventarios-tab" data-bs-toggle="tab" href="#inventarios" role="tab"
-                        aria-controls="inventarios" aria-selected="true">Inventarios por Sede</a>
+                        aria-controls="inventarios" aria-selected="true" >Inventarios por Sede</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ventas-tab" data-bs-toggle="tab" href="#ventas" role="tab"
@@ -51,15 +51,58 @@
                 </div>
             </div>
         </div>
-        
+        <style>
+            .nav-tabs {
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .nav-tabs .nav-item {
+                margin-bottom: -1px;
+            }
+
+            .nav-tabs .nav-link {
+                color: #495057 !important;
+                border: 1px solid transparent;
+                border-top-left-radius: .25rem;
+                border-top-right-radius: .25rem;
+            }
+
+            .nav-tabs .nav-link.active {
+                color: #495057;
+                background-color: #fff;
+                border-color: #dee2e6 #dee2e6 #fff;
+            }
+
+            .nav-tabs .nav-link {
+                color: #007bff;
+                border: 1px solid #dee2e6;
+                border-radius: .25rem .25rem 0 0;
+            }
+
+            .nav-link {
+                display: block;
+                padding: .5rem 1rem;
+            }
+
+            .tab-content {
+                border: 1px solid #dee2e6;
+                border-top: 0;
+                border-radius: 0 0 .25rem .25rem;
+                padding: 1rem;
+            }
+        </style>
     </div>
 
 
     <div th:fragment="contenidoReporteInventario">
+        <br>
+        <h2>Reporte Inventarios por Sucursal</h2>
         <!-- Espacio para el gráfico -->
         <div class="contenedorGraficos">
             <canvas id="inventoryChart" width="200" height="200"></canvas>
         </div>
+        <br>
+        <br>
 
         <table class="table">
             <thead>
@@ -138,10 +181,15 @@
 
 
     <div th:fragment="reporteVentasPorSucursal">
+        <br>
+        <h2>Reporte Ventas Por Sucursal</h2>
         <!-- Espacio para el gráfico -->
         <div class="contenedorGraficos">
             <canvas id="salesChart" width="200" height="200"></canvas>
         </div>
+        <br>
+        <br>
+
         <table class="table">
             <thead>
                 <tr>
@@ -200,12 +248,13 @@
 
 
     <div th:fragment="reporteEmpleadosPorSucursal">
+        <br>
         <h2>Total de Salarios por Sucursal</h2>
         <div class="contenedorGraficos">
             <canvas id="salariosChart"></canvas>
         </div>
 
-
+        <br>
 
         <h1 class="mb-4">Reporte de Empleados por Sucursal</h1>
         <div th:each="entry : ${empleadosPorSucursal}" class="mb-5">
