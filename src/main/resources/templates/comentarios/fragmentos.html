@@ -36,7 +36,7 @@
                                 <form th:action="@{/comentarios/agregar}" th:object="${comentarioObj}" method="post">
                                     <div class="form-group">
                                         <label for="clienteComentario">Cliente</label>
-                                        <select class="form-control" th:field="*{idCliente.nombre}">
+                                        <select class="form-control" th:field="*{idCliente.idCliente}">
                                             <option value="" selected>Seleccione un Cliente</option>
                                             <option th:each="idCliente : ${clientes}" th:value="${idCliente.idCliente}" th:text="${idCliente.nombre}"></option>
                                         </select>
@@ -114,7 +114,7 @@
                     <input type="hidden" th:field="*{idComentario}" />
                     <div class="form-group">
                         <label for="clienteComentario">Cliente</label>
-                        <select class="form-control" th:field="*{idCliente.nombre}">
+                        <select class="form-control" th:field="*{idCliente.idCliente}">
                             <option value="" selected>Seleccione un Cliente</option>
                             <option th:each="idCliente : ${clientes}" th:value="${idCliente.idCliente}" th:text="${idCliente.nombre}"></option>
                         </select>
