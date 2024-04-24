@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.datatech.service.CargoService;
 import com.datatech.dao.CargoDao;
 import com.datatech.domain.Cargo;
-
+    
 import javax.persistence.*;
 
 
@@ -25,7 +25,7 @@ public class CargoServiceImpl implements CargoService {
     public List<Cargo> getCargos() {
         var lista = CargoDao.findAll();
         return lista;
-    }
+}
     
     @Override
     @Transactional(readOnly = true)
